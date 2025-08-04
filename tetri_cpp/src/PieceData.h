@@ -1,5 +1,10 @@
+
+constexpr int TOTAL_KINDS = 7;
+constexpr int TOTAL_ROTATIONS = 4;
+constexpr int FRAME_SIZE = 5;
+
 // Pieces definition
-char mPieces[7 /*kind */][4 /* rotation */][5 /* horizontal blocks */][5 /* vertical blocks */] =
+char mPieces[TOTAL_KINDS][TOTAL_ROTATIONS][FRAME_SIZE][FRAME_SIZE] =
 {
     // Square
     {
