@@ -2,6 +2,7 @@
 constexpr int TOTAL_KINDS = 7;
 constexpr int TOTAL_ROTATIONS = 4;
 constexpr int FRAME_SIZE = 5;
+constexpr int COORDINATES_DIMENSION = 2;
 
 // Pieces definition
 char mPieces[TOTAL_KINDS][TOTAL_ROTATIONS][FRAME_SIZE][FRAME_SIZE] =
@@ -231,55 +232,61 @@ char mPieces[TOTAL_KINDS][TOTAL_ROTATIONS][FRAME_SIZE][FRAME_SIZE] =
     }
 };
 
-int mPiecesInitialPosition[7 /*kind */][4 /* r2otation */][2 /* position */] =
+int mPiecesInitialPosition[TOTAL_KINDS][TOTAL_ROTATIONS][COORDINATES_DIMENSION] =
 {
-    /* Square */
+    // Square
     {
-    {-2, -3},
-    {-2, -3},
-    {-2, -3},
-    {-2, -3}
+        {-2, -3},
+        {-2, -3},
+        {-2, -3},
+        {-2, -3}
     },
-    /* I */
+
+    // Line
     {
-    {-2, -2},
-    {-2, -3},
-    {-2, -2},
-    {-2, -3}
+        {-2, -2},
+        {-2, -3},
+        {-2, -2},
+        {-2, -3}
     },
-    /* L */
+
+    // L Piece
     {
-    {-2, -3},
-    {-2, -3},
-    {-2, -3},
-    {-2, -2}
+        {-2, -3},
+        {-2, -3},
+        {-2, -3},
+        {-2, -2}
     },
-    /* L mirrored */
+    
+    // J Piece
     {
-    {-2, -3},
-    {-2, -2},
-    {-2, -3},
-    {-2, -3}
+        {-2, -3},
+        {-2, -2},
+        {-2, -3},
+        {-2, -3}
     },
-    /* N */
+    
+    // Z Piece
     {
-    {-2, -3},
-    {-2, -3},
-    {-2, -3},
-    {-2, -2}
+        {-2, -3},
+        {-2, -3},
+        {-2, -3},
+        {-2, -2}
     },
-    /* N mirrored */
+    
+    // S Piece
     {
-    {-2, -3},
-    {-2, -3},
-    {-2, -3},
-    {-2, -2}
+        {-2, -3},
+        {-2, -3},
+        {-2, -3},
+        {-2, -2}
     },
-    /* T */
+    
+    // T Piece
     {
-    {-2, -3},
-    {-2, -3},
-    {-2, -3},
-    {-2, -2}
+        {-2, -3},
+        {-2, -3},
+        {-2, -3},
+        {-2, -2}
     },
 };
