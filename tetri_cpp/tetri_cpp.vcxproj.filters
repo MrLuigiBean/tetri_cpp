@@ -18,9 +18,15 @@
     <ClCompile Include="src\tetri_cpp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Pieces.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\PieceData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Pieces.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
