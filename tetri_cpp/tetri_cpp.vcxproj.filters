@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="tetri_cpp.cpp">
+    <ClCompile Include="src\tetri_cpp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
