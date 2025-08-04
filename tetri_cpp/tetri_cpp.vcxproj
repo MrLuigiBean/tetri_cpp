@@ -21,6 +21,9 @@
   <ItemGroup>
     <ClCompile Include="src\tetri_cpp.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\PieceData.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
