@@ -1,5 +1,7 @@
-#ifndef _PIECES_
-#define _PIECES_
+#pragma once
+
+#ifndef PIECES_H
+#define PIECES_H
 
 // ---------------------------
 // Pieces
@@ -14,4 +16,4 @@ public:
     int GetYInitialPosition(int pPiece, int pRotation);
 };
 
-#endif // _PIECES_
+#endif // PIECES_H

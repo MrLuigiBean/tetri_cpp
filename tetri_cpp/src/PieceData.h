@@ -1,3 +1,4 @@
+#pragma once
 
 constexpr int TOTAL_KINDS = 7;
 constexpr int TOTAL_ROTATIONS = 4;
