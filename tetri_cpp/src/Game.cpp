@@ -1,10 +1,9 @@
 #include "Game.h"
 #include <cstdlib>
 
-Game::Game(Board* pBoard, Pieces* pPieces, IO* pIO, int pScreenHeight)
+Game::Game(Board* pBoard, IO* pIO, int pScreenHeight)
 {
     static_cast<void>(pBoard);
-    static_cast<void>(pPieces);
     static_cast<void>(pIO);
     static_cast<void>(pScreenHeight);
 }
@@ -40,8 +39,8 @@ void Game::InitGame()
     // First piece
     mPiece = GetRand(0, 6);
     mRotation = GetRand(0, 3);
-    mPosX = (BOARD_WIDTH / 2) + mPieces->GetXInitialPosition(mPiece, mRotation);
-    mPosY = mPieces->GetYInitialPosition(mPiece, mRotation);
+    mPosX = (BOARD_WIDTH / 2) + Pieces::GetXInitialPosition(mPiece, mRotation);
+    mPosY = Pieces::GetYInitialPosition(mPiece, mRotation);
 
     // Next piece
     mNextPiece = GetRand(0, 6);
@@ -62,8 +61,8 @@ void Game::CreateNewPiece()
     // The new piece
     mPiece = mNextPiece;
     mRotation = mNextRotation;
-    mPosX = (BOARD_WIDTH / 2) + mPieces->GetXInitialPosition(mPiece, mRotation);
-    mPosY = mPieces->GetYInitialPosition(mPiece, mRotation);
+    mPosX = (BOARD_WIDTH / 2) + Pieces::GetXInitialPosition(mPiece, mRotation);
+    mPosY = Pieces::GetYInitialPosition(mPiece, mRotation);
 
     // Random next piece
     mNextPiece = GetRand(0, 6);
@@ -98,13 +97,13 @@ void Game::DrawPiece(int pX, int pY, int pPiece, int pRotation)
         for (int j = 0; j < PIECE_BLOCKS; j++)
         {
             // Get the type of the block and draw it with the correct color
-            switch (mPieces->GetBlockType(pPiece, pRotation, j, i))
+            switch (Pieces::GetBlockType(pPiece, pRotation, j, i))
             {
             case 1: mColor = GREEN; break; // For each block of the piece except the pivot
             case 2: mColor = BLUE; break; // For the pivot
             }
 
-            if (mPieces->GetBlockType(pPiece, pRotation, j, i) != 0)
+            if (Pieces::GetBlockType(pPiece, pRotation, j, i) != 0)
                 mIO->DrawRectangle(mPixelsX + i * BLOCK_SIZE,
                     mPixelsY + j * BLOCK_SIZE,
                     (mPixelsX + i * BLOCK_SIZE) + BLOCK_SIZE - 1,

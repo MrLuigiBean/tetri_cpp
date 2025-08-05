@@ -19,7 +19,7 @@ class Game
 {
 public:
 
-    Game(Board* pBoard, Pieces* pPieces, IO* pIO, int pScreenHeight);
+    Game(Board* pBoard, IO* pIO, int pScreenHeight);
 
     void DrawScene();
     void CreateNewPiece();
@@ -34,7 +34,6 @@ private:
     int mNextPiece, mNextRotation; // Kind and rotation of the next piece
 
     Board* mBoard;
-    Pieces* mPieces;
     IO* mIO;
 
     int GetRand(int pA, int pB);
