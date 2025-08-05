@@ -14,6 +14,8 @@
 #include <SDL3/SDL_main.h>
 
 #include "AppState.h"
+#include "Game.h"
+#include "IO.h"
 
 /* This function runs once at startup. */
 SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
@@ -29,8 +31,18 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
         return SDL_APP_FAILURE;
     }
 
-    // store the window and renderer in appstate to be passed around in other SDL_App??? functions
+    int screenHeight;
+    {
+        int temp;
+        SDL_GetRenderOutputSize(state.renderer, &temp, &screenHeight);
+    }
+
+    static Game game(screenHeight);
+    state.game = &game;
+
+    // store the window, renderer and game in appstate to be passed around in other SDL_App??? functions
     *appstate = &state;
+    IO::appState = &state; // IO will need the references to the window and renderer
 
     return SDL_APP_CONTINUE;
 }

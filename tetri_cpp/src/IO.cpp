@@ -19,13 +19,13 @@ void IO::ClearScreen()
 {
 }
 
-int IO::GetScreenHeight()
-{
-    int width, height;
-    SDL_GetRenderOutputSize(appState->renderer, &width, &height);
-    static_cast<void>(width); //unused
-    return height;
-}
+//int IO::GetScreenHeight()
+//{
+//    int width, height;
+//    SDL_GetRenderOutputSize(appState->renderer, &width, &height);
+//    static_cast<void>(width); //unused
+//    return height;
+//}
 
 int IO::InitGraph()
 {

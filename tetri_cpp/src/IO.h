@@ -17,7 +17,7 @@ namespace IO
     extern AppState* appState;
     void DrawRectangle(int pX1, int pY1, int pX2, int pY2, color pC);
     void ClearScreen();
-    int GetScreenHeight();
+    // int GetScreenHeight();
     int InitGraph();
     int Pollkey();
     int Getkey();
