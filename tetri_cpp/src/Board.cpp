@@ -58,7 +58,7 @@ Check if the game is over because a piece has achieved the upper position
 Returns true or false
 ======================================
 */
-bool Board::IsGameOver() const 
+bool Board::IsGameOver() const
 {
     //If the first line has blocks, then, game over
     for (int i = 0; i < BOARD_WIDTH; i++)
@@ -144,7 +144,7 @@ Parameters:
 */
 int Board::GetXPosInPixels(int pPos) const
 {
-    return ((BOARD_POSITION -(BLOCK_SIZE * (BOARD_WIDTH / 2))) + (pPos * BLOCK_SIZE));
+    return ((BOARD_POSITION - (BLOCK_SIZE * (BOARD_WIDTH / 2))) + (pPos * BLOCK_SIZE));
 }
 
 /*
@@ -158,7 +158,7 @@ Parameters:
 */
 int Board::GetYPosInPixels(int pPos) const
 {
-    return ((mScreenHeight -(BLOCK_SIZE * BOARD_HEIGHT)) + (pPos * BLOCK_SIZE));
+    return ((mScreenHeight - (BLOCK_SIZE * BOARD_HEIGHT)) + (pPos * BLOCK_SIZE));
 }
 
 // IsPossibleMovement is the last and most complex method of Board class.This method will be used later in the main loop to check if the movement of a piece is possible or not.The method compares all the blocks of a piece with the blocks already stored in the board and with the board limits.That comparison is made by iterating through the piece matrix and comparing with the appropriate 5x5 area in the board.If there is a collision that means the movement is not possible, so it returns false.If there is no collision, the movement is possible and it returns true.

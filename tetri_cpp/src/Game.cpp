@@ -123,9 +123,9 @@ void Game::DrawBoard()
 {
 
     // Calculate the limits of the board in pixels
-    int mX1 = BOARD_POSITION -(BLOCK_SIZE * (BOARD_WIDTH / 2)) - 1;
+    int mX1 = BOARD_POSITION - (BLOCK_SIZE * (BOARD_WIDTH / 2)) - 1;
     int mX2 = BOARD_POSITION + (BLOCK_SIZE * (BOARD_WIDTH / 2));
-    int mY = mScreenHeight -(BLOCK_SIZE * BOARD_HEIGHT);
+    int mY = mScreenHeight - (BLOCK_SIZE * BOARD_HEIGHT);
 
     // Check that the vertical margin is not to small
     //assert (mY > MIN_VERTICAL_MARGIN);

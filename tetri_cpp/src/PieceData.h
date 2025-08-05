@@ -258,7 +258,7 @@ int mPiecesInitialPosition[TOTAL_KINDS][TOTAL_ROTATIONS][COORDINATES_DIMENSION] 
         {-2, -3},
         {-2, -2}
     },
-    
+
     // J Piece
     {
         {-2, -3},
@@ -266,7 +266,7 @@ int mPiecesInitialPosition[TOTAL_KINDS][TOTAL_ROTATIONS][COORDINATES_DIMENSION] 
         {-2, -3},
         {-2, -3}
     },
-    
+
     // Z Piece
     {
         {-2, -3},
@@ -274,7 +274,7 @@ int mPiecesInitialPosition[TOTAL_KINDS][TOTAL_ROTATIONS][COORDINATES_DIMENSION] 
         {-2, -3},
         {-2, -2}
     },
-    
+
     // S Piece
     {
         {-2, -3},
@@ -282,7 +282,7 @@ int mPiecesInitialPosition[TOTAL_KINDS][TOTAL_ROTATIONS][COORDINATES_DIMENSION] 
         {-2, -3},
         {-2, -2}
     },
-    
+
     // T Piece
     {
         {-2, -3},
