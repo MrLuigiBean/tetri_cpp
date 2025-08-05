@@ -42,7 +42,7 @@ private:
         POS_FREE,  // free position of the board 
         POS_FILLED // filled position of the board
     };
-    int mBoard[BOARD_WIDTH][BOARD_HEIGHT] = { 0 }; // Board that contains the pieces
+    char mBoard[BOARD_WIDTH][BOARD_HEIGHT] = { 0 }; // Board that contains the pieces
     int mScreenHeight = 0;
 
     void InitBoard();
