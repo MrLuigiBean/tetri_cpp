@@ -25,7 +25,7 @@ class Board
 {
 public:
 
-    Board(Pieces* pPieces, int pScreenHeight);
+    Board(int pScreenHeight);
 
     int GetXPosInPixels(int pPos) const;
     int GetYPosInPixels(int pPos) const;
@@ -43,7 +43,6 @@ private:
         POS_FILLED // filled position of the board
     };
     int mBoard[BOARD_WIDTH][BOARD_HEIGHT] = { 0 }; // Board that contains the pieces
-    Pieces* mPieces = nullptr;
     int mScreenHeight = 0;
 
     void InitBoard();
