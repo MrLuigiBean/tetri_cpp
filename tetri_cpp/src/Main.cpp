@@ -27,7 +27,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     Game mGame(&mBoard, &mPieces, &mIO, mScreenHeight);
 
     // Get the actual clock milliseconds (SDL)
-    unsigned long mTime1 = SDL_GetTicks();
+    unsigned long mTime1 = static_cast<unsigned long>(SDL_GetTicks());
 
     // This is the main loop.We can exit by pressing ESC.In each frame we clear and update the screen and draw everything.
 
@@ -107,7 +107,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
         // -- Vertical movement --
 
-        unsigned long mTime2 = SDL_GetTicks();
+        unsigned long mTime2 = static_cast<unsigned long>(SDL_GetTicks());
 
         if ((mTime2 - mTime1) > WAIT_TIME)
         {
@@ -130,7 +130,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
                 mGame.CreateNewPiece();
             }
 
-            mTime1 = SDL_GetTicks();
+            mTime1 = static_cast<unsigned long>(SDL_GetTicks());
         }
     }
 

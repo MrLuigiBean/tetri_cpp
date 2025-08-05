@@ -1,6 +1,10 @@
 #include "Game.h"
 #include <cstdlib>
 
+Game::Game(Board* pBoard, Pieces* pPieces, IO* pIO, int pScreenHeight)
+{
+}
+
 // GetRand is a trivial method that returns a random number between two boundaries.
 
 /*

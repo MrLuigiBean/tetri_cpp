@@ -9,9 +9,7 @@
 #include "IO.h"
 #include <time.h>
 
-// -- Defines --
-
-#define WAIT_TIME 700 // Number of milliseconds that the piece remains before going 1 block down */
+constexpr int WAIT_TIME = 700; // Number of milliseconds that the piece remains before going 1 block down */
 
 // ---------------------------
 // Game

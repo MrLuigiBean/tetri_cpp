@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _IO_
-#define _IO_
+#ifndef IO_H
+#define IO_H
 
 // -- Includes --
 
@@ -39,4 +39,4 @@ public:
 
 };
 
-#endif // _IO_
+#endif // IO_H

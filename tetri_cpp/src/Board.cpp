@@ -1,5 +1,9 @@
 #include "Board.h"
 
+Board::Board(Pieces* pPieces, int pScreenHeight)
+{
+}
+
 // Now, let's see each different method.
 
 // InitBoard method is just a nested loop that initializes all the board blocks to POS_FREE.
