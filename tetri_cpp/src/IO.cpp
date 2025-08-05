@@ -86,19 +86,6 @@ void IO::ClearScreen()
     SDL_RenderClear(appState->renderer);
 }
 
-//int IO::GetScreenHeight()
-//{
-//    int width, height;
-//    SDL_GetRenderOutputSize(appState->renderer, &width, &height);
-//    static_cast<void>(width); //unused
-//    return height;
-//}
-
-int IO::InitGraph()
-{
-    return 0;
-}
-
 int IO::Pollkey()
 {
     return 0;
