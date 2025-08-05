@@ -30,6 +30,7 @@
     <ClInclude Include="src\Board.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\IO.h" />
+    <ClInclude Include="src\AppState.h" />
     <ClInclude Include="src\PieceData.h" />
     <ClInclude Include="src\Pieces.h" />
     <ClInclude Include="src\Utils.h" />
