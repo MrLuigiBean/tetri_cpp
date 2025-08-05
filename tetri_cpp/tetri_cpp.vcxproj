@@ -20,11 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Board.cpp" />
+    <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Pieces.cpp" />
     <ClCompile Include="src\tetri_cpp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Board.h" />
+    <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\PieceData.h" />
     <ClInclude Include="src\Pieces.h" />
   </ItemGroup>
