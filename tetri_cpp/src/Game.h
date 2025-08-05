@@ -5,9 +5,6 @@
 // -- Includes --
 
 #include "Board.h"
-#include "Pieces.h"
-#include "IO.h"
-#include <time.h>
 
 constexpr int WAIT_TIME = 700; // Number of milliseconds that the piece remains before going 1 block down */
 

@@ -1,5 +1,8 @@
 #include "Game.h"
+#include "Pieces.h"
+#include "IO.h"
 #include <cstdlib>
+#include <time.h>
 
 Game::Game(Board* pBoard, int pScreenHeight)
 {
