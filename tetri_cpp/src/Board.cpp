@@ -127,7 +127,7 @@ bool Board::IsFreeBlock(int pX, int pY) const
     if (mBoard[pX][pY] == POS_FREE) return true; else return false;
 }
 
-// Until now we have been always talking about «blocks».But in order to draw them to the screen we need to specify the position in pixels.So, we need two methods(GetXPosInPixels and GetYPosInPixels) in order to obtain the horizontal and vertical position in pixels of a given block.
+// Until now we have been always talking about `blocks`.But in order to draw them to the screen we need to specify the position in pixels.So, we need two methods(GetXPosInPixels and GetYPosInPixels) in order to obtain the horizontal and vertical position in pixels of a given block.
 
 /*
 ======================================
