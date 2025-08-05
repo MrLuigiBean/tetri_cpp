@@ -6,6 +6,33 @@
 
 AppState* IO::appState = nullptr;
 
+namespace IO
+{
+    /// @brief Helper for saving the currently set color before modifications and
+    ///        applying it when modifications are complete.
+    ///        Kept inside namespace IO to retain appState information.
+    struct SaveAndLoadDrawColor
+    {
+        Uint8 r, g, b, a;
+
+        SaveAndLoadDrawColor()
+        {
+            SDL_GetRenderDrawColor(appState->renderer, &r, &g, &b, &a);
+        }
+
+        ~SaveAndLoadDrawColor()
+        {
+            SDL_SetRenderDrawColor(appState->renderer, r, g, b, a);
+        }
+
+        SaveAndLoadDrawColor(const SaveAndLoadDrawColor&) = delete;
+        SaveAndLoadDrawColor(SaveAndLoadDrawColor&&) = delete;
+
+        SaveAndLoadDrawColor& operator=(const SaveAndLoadDrawColor&) = delete;
+        SaveAndLoadDrawColor& operator=(SaveAndLoadDrawColor&&) = delete;
+    };
+}
+
 void IO::DrawRectangle(int pX1, int pY1, int pX2, int pY2, color pC)
 {
     static_cast<void>(pX1);
@@ -17,11 +44,10 @@ void IO::DrawRectangle(int pX1, int pY1, int pX2, int pY2, color pC)
 
 void IO::ClearScreen()
 {
-    Uint8 r, g, b, a;
-    SDL_GetRenderDrawColor(appState->renderer, &r, &g, &b, &a);
+    SaveAndLoadDrawColor _;
+
     SDL_SetRenderDrawColor(appState->renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
     SDL_RenderClear(appState->renderer);
-    SDL_SetRenderDrawColor(appState->renderer, r, g, b, a);
 }
 
 //int IO::GetScreenHeight()
