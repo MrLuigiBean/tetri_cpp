@@ -6,7 +6,7 @@
 
 // -- Enums --
 
-enum color { BLACK, RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, WHITE, COLOR_MAX }; // Colors
+enum ColorLabel { BLACK, RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, WHITE };
 
 // ---------------------------
 // IO
@@ -15,7 +15,7 @@ enum color { BLACK, RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, WHITE, COLOR_MAX };
 namespace IO
 {
     extern AppState* appState;
-    void DrawRectangle(int pX1, int pY1, int pX2, int pY2, color pC);
+    void DrawRectangle(int pX1, int pY1, int pX2, int pY2, ColorLabel pC);
     void ClearScreen();
     // int GetScreenHeight();
     int InitGraph();

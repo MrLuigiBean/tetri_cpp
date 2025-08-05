@@ -33,13 +33,49 @@ namespace IO
     };
 }
 
-void IO::DrawRectangle(int pX1, int pY1, int pX2, int pY2, color pC)
+struct Color { Uint8 r, g, b, a; };
+
+static Color GetColorFromLabel(ColorLabel label)
 {
-    static_cast<void>(pX1);
-    static_cast<void>(pY1);
-    static_cast<void>(pX2);
-    static_cast<void>(pY2);
-    static_cast<void>(pC);
+    switch (label)
+    {
+    case BLACK:
+        return { 0, 0, 0, 255 };
+    case RED:
+        return { 255, 0, 0, 255 };
+    case GREEN:
+        return { 0, 255, 0, 255 };
+    case BLUE:
+        return { 0, 0, 255, 255 };
+    case CYAN:
+        return { 0, 255, 255, 255 };
+    case MAGENTA:
+        return { 255, 0, 255, 255 };
+    case YELLOW:
+        return { 255, 255, 0, 255 };
+    case WHITE:
+    default:
+        return { 255, 255, 255, 255 };
+    }
+}
+
+void IO::DrawRectangle(int pX1, int pY1, int pX2, int pY2, ColorLabel colorLabel)
+{
+    SaveAndLoadDrawColor _;
+
+    SDL_Rect rect
+    {
+        .x = pX1 < pX2 ? pX1 : pX2,
+        .y = pY1 < pY2 ? pY1 : pY2,
+        .w = abs(pX1 - pX2),
+        .h = abs(pY1 - pY2),
+    };
+    SDL_FRect frect{};
+    SDL_RectToFRect(&rect, &frect);
+
+    Color col = GetColorFromLabel(colorLabel);
+    SDL_SetRenderDrawColor(appState->renderer, col.r, col.g, col.b, col.a);
+    SDL_RenderFillRect(appState->renderer, &frect);
 }
 
 void IO::ClearScreen()

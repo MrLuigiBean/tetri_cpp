@@ -83,7 +83,7 @@ Parameters:
 */
 void Game::DrawPiece(int pX, int pY, int pPiece, int pRotation)
 {
-    color mColor = color::BLUE; // Color of the block
+    ColorLabel mColor = ColorLabel::BLUE; // Color of the block
 
     // Obtain the position in pixel in the screen of the block we want to draw
     int mPixelsX = mBoard.GetXPosInPixels(pX);
