@@ -10,6 +10,11 @@ Main
 */
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
+    static_cast<void>(hInstance);
+    static_cast<void>(hPrevInstance);
+    static_cast<void>(lpCmdLine);
+    static_cast<void>(nCmdShow);
+
     // -- Vars --
 
     // Class for drawing staff, it uses SDL for the rendering. Change the methods of this class

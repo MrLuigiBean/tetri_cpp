@@ -2,6 +2,8 @@
 
 Board::Board(Pieces* pPieces, int pScreenHeight)
 {
+    static_cast<void>(pPieces);
+    static_cast<void>(pScreenHeight);
 }
 
 // Now, let's see each different method.

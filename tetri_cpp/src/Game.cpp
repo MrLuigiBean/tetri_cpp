@@ -3,6 +3,10 @@
 
 Game::Game(Board* pBoard, Pieces* pPieces, IO* pIO, int pScreenHeight)
 {
+    static_cast<void>(pBoard);
+    static_cast<void>(pPieces);
+    static_cast<void>(pIO);
+    static_cast<void>(pScreenHeight);
 }
 
 // GetRand is a trivial method that returns a random number between two boundaries.
@@ -82,7 +86,7 @@ Parameters:
 */
 void Game::DrawPiece(int pX, int pY, int pPiece, int pRotation)
 {
-    color mColor; // Color of the block
+    color mColor = color::BLUE; // Color of the block
 
     // Obtain the position in pixel in the screen of the block we want to draw
     int mPixelsX = mBoard->GetXPosInPixels(pX);
