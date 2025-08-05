@@ -1,7 +1,18 @@
-#include "Game.h"
 #ifndef LINUX
 #include <windows.h>
 #endif
+
+#ifndef LINUX
+#include "SDL3/SDL.h"
+// #include "SDL3/SDL_GfxPrimitives/SDL_gfxPrimitives.h"
+#else
+#include <SDL/SDL.h>
+#include "SDL/SDL_GfxPrimitives/sdl_gfxprimitives.h"
+#endif
+// #pragma comment (lib, "SDL3/lib/SDL.lib")
+// #pragma comment (lib, "SDL3/SDL_GfxPrimitives/SDL_GfxPrimitives_Static.lib")
+
+#include "Game.h"
 
 /*
 ==================
