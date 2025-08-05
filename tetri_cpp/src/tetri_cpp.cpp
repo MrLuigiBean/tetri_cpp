@@ -79,7 +79,7 @@ SDL_AppResult SDL_AppIterate(void* appstate)
     IO::ClearScreen();
     SDL_SetRenderDrawColor(state->renderer, 255, 255, 255, 255);
     SDL_RenderDebugText(state->renderer, x, y, message);
-    SDL_RenderPresent(state->renderer);
+    IO::UpdateScreen();
 
     return SDL_APP_CONTINUE;
 }

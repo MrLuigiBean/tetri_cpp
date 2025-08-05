@@ -117,4 +117,5 @@ int IO::IsKeyDown(int pKey)
 
 void IO::UpdateScreen()
 {
+    SDL_RenderPresent(appState->renderer);
 }
