@@ -1,10 +1,9 @@
 #include "Game.h"
 #include <cstdlib>
 
-Game::Game(Board* pBoard, IO* pIO, int pScreenHeight)
+Game::Game(Board* pBoard, int pScreenHeight)
 {
     static_cast<void>(pBoard);
-    static_cast<void>(pIO);
     static_cast<void>(pScreenHeight);
 }
 
@@ -104,7 +103,7 @@ void Game::DrawPiece(int pX, int pY, int pPiece, int pRotation)
             }
 
             if (Pieces::GetBlockType(pPiece, pRotation, j, i) != 0)
-                mIO->DrawRectangle(mPixelsX + i * BLOCK_SIZE,
+                IO::DrawRectangle(mPixelsX + i * BLOCK_SIZE,
                     mPixelsY + j * BLOCK_SIZE,
                     (mPixelsX + i * BLOCK_SIZE) + BLOCK_SIZE - 1,
                     (mPixelsY + j * BLOCK_SIZE) + BLOCK_SIZE - 1,
@@ -134,9 +133,9 @@ void Game::DrawBoard()
     //assert (mY > MIN_VERTICAL_MARGIN);
 
     // Rectangles that delimits the board
-    mIO->DrawRectangle(mX1 - BOARD_LINE_WIDTH, mY, mX1, mScreenHeight - 1, BLUE);
+    IO::DrawRectangle(mX1 - BOARD_LINE_WIDTH, mY, mX1, mScreenHeight - 1, BLUE);
 
-    mIO->DrawRectangle(mX2, mY, mX2 + BOARD_LINE_WIDTH, mScreenHeight - 1, BLUE);
+    IO::DrawRectangle(mX2, mY, mX2 + BOARD_LINE_WIDTH, mScreenHeight - 1, BLUE);
 
     // Check that the horizontal margin is not to small
     //assert (mX1 > MIN_HORIZONTAL_MARGIN);
@@ -149,7 +148,7 @@ void Game::DrawBoard()
         {
             // Check if the block is filled, if so, draw it
             if (!mBoard->IsFreeBlock(i, j))
-                mIO->DrawRectangle(mX1 + i * BLOCK_SIZE,
+                IO::DrawRectangle(mX1 + i * BLOCK_SIZE,
                     mY + j * BLOCK_SIZE,
                     (mX1 + i * BLOCK_SIZE) + BLOCK_SIZE - 1,
                     (mY + j * BLOCK_SIZE) + BLOCK_SIZE - 1,

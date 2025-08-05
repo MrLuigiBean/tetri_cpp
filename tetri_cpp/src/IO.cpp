@@ -12,10 +12,6 @@
 // #pragma comment (lib, "SDL3/lib/SDL.lib")
 // #pragma comment (lib, "SDL3/SDL_GfxPrimitives/SDL_GfxPrimitives_Static.lib")
 
-IO::IO()
-{
-}
-
 void IO::DrawRectangle(int pX1, int pY1, int pX2, int pY2, color pC)
 {
     static_cast<void>(pX1);

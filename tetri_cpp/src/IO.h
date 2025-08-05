@@ -10,13 +10,9 @@ enum color { BLACK, RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, WHITE, COLOR_MAX };
 // IO
 // ---------------------------
 
-class IO
+namespace IO
 {
-public:
-
-    IO();
-
-    void DrawRectangle(int pX1, int pY1, int pX2, int pY2, enum color pC);
+    void DrawRectangle(int pX1, int pY1, int pX2, int pY2, color pC);
     void ClearScreen();
     int GetScreenHeight();
     int InitGraph();
@@ -24,7 +20,6 @@ public:
     int Getkey();
     int IsKeyDown(int pKey);
     void UpdateScreen();
-
 };
 
 #endif // IO_H
