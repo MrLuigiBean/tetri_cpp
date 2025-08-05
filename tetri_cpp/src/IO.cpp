@@ -2,15 +2,9 @@
 
 // -- Includes --
 
-#ifndef LINUX
 #include "SDL3/SDL.h"
-// #include "SDL3/SDL_GfxPrimitives/SDL_gfxPrimitives.h"
-#else
-#include <SDL/SDL.h>
-#include "SDL/SDL_GfxPrimitives/sdl_gfxprimitives.h"
-#endif
-// #pragma comment (lib, "SDL3/lib/SDL.lib")
-// #pragma comment (lib, "SDL3/SDL_GfxPrimitives/SDL_GfxPrimitives_Static.lib")
+
+AppState* IO::appState = nullptr;
 
 void IO::DrawRectangle(int pX1, int pY1, int pX2, int pY2, color pC)
 {
@@ -27,7 +21,10 @@ void IO::ClearScreen()
 
 int IO::GetScreenHeight()
 {
-    return 0;
+    int width, height;
+    SDL_GetRenderOutputSize(appState->renderer, &width, &height);
+    static_cast<void>(width); //unused
+    return height;
 }
 
 int IO::InitGraph()
