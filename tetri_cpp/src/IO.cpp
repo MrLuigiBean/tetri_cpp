@@ -17,6 +17,11 @@ void IO::DrawRectangle(int pX1, int pY1, int pX2, int pY2, color pC)
 
 void IO::ClearScreen()
 {
+    Uint8 r, g, b, a;
+    SDL_GetRenderDrawColor(appState->renderer, &r, &g, &b, &a);
+    SDL_SetRenderDrawColor(appState->renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+    SDL_RenderClear(appState->renderer);
+    SDL_SetRenderDrawColor(appState->renderer, r, g, b, a);
 }
 
 //int IO::GetScreenHeight()

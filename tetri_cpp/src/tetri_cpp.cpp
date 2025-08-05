@@ -76,8 +76,7 @@ SDL_AppResult SDL_AppIterate(void* appstate)
     y = ((h / scale) - SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE) / 2;
 
     /* Draw the message */
-    SDL_SetRenderDrawColor(state->renderer, 0, 0, 0, 255);
-    SDL_RenderClear(state->renderer);
+    IO::ClearScreen();
     SDL_SetRenderDrawColor(state->renderer, 255, 255, 255, 255);
     SDL_RenderDebugText(state->renderer, x, y, message);
     SDL_RenderPresent(state->renderer);
