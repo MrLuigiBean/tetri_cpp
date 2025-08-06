@@ -21,6 +21,7 @@ namespace IO
 
     void PollKey(SDL_KeyboardEvent keyEvent);
     int IsKeyDown(Inputs action);
+    void ClearButtonDown();
 };
 
 #endif // IO_H

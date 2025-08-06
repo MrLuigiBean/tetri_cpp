@@ -94,8 +94,17 @@ void IO::ClearScreen()
     SDL_RenderClear(appState->renderer);
 }
 
+void IO::UpdateScreen()
+{
+    SDL_RenderPresent(appState->renderer);
+}
+
 void IO::PollKey(SDL_KeyboardEvent keyEvent)
 {
+    // prevent repeat button presses - only one at a time!
+    if (keyEvent.repeat)
+        return;
+
     switch (keyEvent.key)
     {
     case SDLK_RIGHT:    IO::keyStates[Cast(Inputs::RIGHT)] = keyEvent.down; break;
@@ -112,7 +121,9 @@ int IO::IsKeyDown(Inputs action)
     return keyStates[Cast(action)];
 }
 
-void IO::UpdateScreen()
+void IO::ClearButtonDown()
 {
-    SDL_RenderPresent(appState->renderer);
+    // Rotate is the only button that is not continous.
+    // Up,down,left,right are all movements, they're allowed to be continous.
+    keyStates[Cast(Inputs::ROTATE)] = false;
 }
