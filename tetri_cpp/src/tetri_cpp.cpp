@@ -85,7 +85,7 @@ SDL_AppResult SDL_AppIterate(void* appstate)
     state->game->DrawScene();
     IO::UpdateScreen();
 
-    IO::ClearButtonDown();
+    IO::ClearKeyStates();
 
     return SDL_APP_CONTINUE;
 }
