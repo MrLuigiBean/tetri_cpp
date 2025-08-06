@@ -4,90 +4,65 @@
 #include <cstdlib>
 #include <time.h>
 
-Game::Game(int pScreenHeight) : mScreenHeight{ pScreenHeight }, board{ Board(pScreenHeight) } {}
+/// @brief Constructs the board of the game using a given size.
+/// @param height The height of the screen in pixels.
+Game::Game(int height) : screenHeight{ height }, board{ Board(height) } {}
 
-// GetRand is a trivial method that returns a random number between two boundaries.
-
-/*
-======================================
-Get a random int between to integers
-
-Parameters:
->> pA: First number
->> pB: Second number
-======================================
-*/
-int Game::GetRand(int pA, int pB)
+/// @brief Returns a random number between two integers.
+/// @param a The lower end of the range.
+/// @param b The upper end of the range.
+/// @return A random number in the range [a, b]
+int Game::GetRand(int a, int b)
 {
-    return rand() % (pB - pA + 1) + pA;
+    return rand() % (b - a + 1) + a;
 }
 
-// InitGame, takes care of the initialization of the game by selecting the first and next piece randomly.The next piece is shown so the player can see which piece will appear next.This method also sets the position in blocks of that pieces.We use two methods that we have seen before in `Pieces` class : GetXInitialPosition and GetYInitialPosition in order to initialize the piece in the correct position.
-
-/*
-======================================
-Initial parameters of the game
-======================================
-*/
+/// @brief Selects the first and next piece randomly.
 void Game::InitGame()
 {
     // Init random numbers
     srand((unsigned int)time(NULL));
 
     // First piece
-    mPiece = GetRand(0, 6);
-    mRotation = GetRand(0, 3);
-    mPosX = (BOARD_WIDTH / 2) + Pieces::GetXInitialPosition(mPiece, mRotation);
-    mPosY = Pieces::GetYInitialPosition(mPiece, mRotation);
+    piece = GetRand(0, 6);
+    rotation = GetRand(0, 3);
+    posX = (BOARD_WIDTH / 2) + Pieces::GetXInitialPosition(piece, rotation);
+    posY = Pieces::GetYInitialPosition(piece, rotation);
 
     // Next piece
-    mNextPiece = GetRand(0, 6);
-    mNextRotation = GetRand(0, 3);
-    mNextPosX = BOARD_WIDTH + 5;
-    mNextPosY = 5;
+    nextPiece = GetRand(0, 6);
+    nextRotation = GetRand(0, 3);
+    nextPosX = BOARD_WIDTH + 5;
+    nextPosY = 5;
 }
 
-// CreateNewPiece method sets the `next piece` as the current one and resets its position, then selects a new `next piece`.
-
-/*
-======================================
-Create a random piece
-======================================
-*/
+/// @brief Sets the next piece as the current one and resets its position,
+/// after which a new "next piece" is selected.
 void Game::CreateNewPiece()
 {
     // The new piece
-    mPiece = mNextPiece;
-    mRotation = mNextRotation;
-    mPosX = (BOARD_WIDTH / 2) + Pieces::GetXInitialPosition(mPiece, mRotation);
-    mPosY = Pieces::GetYInitialPosition(mPiece, mRotation);
+    piece = nextPiece;
+    rotation = nextRotation;
+    posX = (BOARD_WIDTH / 2) + Pieces::GetXInitialPosition(piece, rotation);
+    posY = Pieces::GetYInitialPosition(piece, rotation);
 
     // Random next piece
-    mNextPiece = GetRand(0, 6);
-    mNextRotation = GetRand(0, 3);
+    nextPiece = GetRand(0, 6);
+    nextRotation = GetRand(0, 3);
 }
 
-// DrawPiece is a really easy method that iterates through the piece matrix and draws each block of the piece.It uses green for the normal blocks and blue for the pivot block.For drawing the rectangles it calls to DrawRectangle method of the class `IO` that we will see later.
-
-/*
-======================================
-Draw piece
-
-Parameters:
-
->> pX: Horizontal position in blocks
->> pY: Vertical position in blocks
->> pPiece: Piece to draw
->> pRotation: 1 of the 4 possible rotations
-======================================
-*/
-void Game::DrawPiece(int pX, int pY, int pPiece, int pRotation)
+/// @brief Draws a given piece.
+/// @param posX The x-coordinate of the piece.
+/// @param posY The y-coordinate of the piece.
+/// @param piece The kind of the piece.
+/// @param rotation The rotation of the piece.
+void Game::DrawPiece(int posX, int posY, int piece, int rotation) const
 {
-    ColorLabel mColor = ColorLabel::BLUE; // Color of the block
+    ColorLabel col = ColorLabel::BLUE; // Color of the block
 
     // Obtain the position in pixel in the screen of the block we want to draw
-    int mPixelsX = board.GetXPosInPixels(pX);
-    int mPixelsY = board.GetYPosInPixels(pY);
+    int pixelsX = board.GetXPosInPixels(posX);
+    int pixelsY = board.GetYPosInPixels(posY);
 
     // Travel the matrix of blocks of the piece and draw the blocks that are filled
     for (int i = 0; i < PIECE_BLOCKS; i++)
@@ -95,79 +70,62 @@ void Game::DrawPiece(int pX, int pY, int pPiece, int pRotation)
         for (int j = 0; j < PIECE_BLOCKS; j++)
         {
             // Get the type of the block and draw it with the correct color
-            switch (Pieces::GetBlockType(pPiece, pRotation, j, i))
+            switch (Pieces::GetBlockType(piece, rotation, j, i))
             {
-            case 1: mColor = GREEN; break; // For each block of the piece except the pivot
-            case 2: mColor = BLUE; break; // For the pivot
+            case 1: col = GREEN; break; // For each block of the piece except the pivot
+            case 2: col = BLUE; break; // For the pivot
             }
 
-            if (Pieces::GetBlockType(pPiece, pRotation, j, i) != 0)
-                IO::DrawRectangle(mPixelsX + i * BLOCK_SIZE,
-                    mPixelsY + j * BLOCK_SIZE,
-                    (mPixelsX + i * BLOCK_SIZE) + BLOCK_SIZE - 1,
-                    (mPixelsY + j * BLOCK_SIZE) + BLOCK_SIZE - 1,
-                    mColor);
+            if (Pieces::GetBlockType(piece, rotation, j, i) != 0)
+                IO::DrawRectangle(pixelsX + i * BLOCK_SIZE,
+                    pixelsY + j * BLOCK_SIZE,
+                    (pixelsX + i * BLOCK_SIZE) + BLOCK_SIZE - 1,
+                    (pixelsY + j * BLOCK_SIZE) + BLOCK_SIZE - 1,
+                    col);
         }
     }
 }
 
-// DrawBoard is similiar to the previous method.It draws two blue columns that are used as the limits of the boards.Then draws the board blocks that are flagged as POS_FILLED in a nested loop.
-
-/*
-======================================
-Draw board
-
-Draw the two lines that delimit the board
-======================================
-*/
-void Game::DrawBoard()
+/// @brief Draws the board's delimiters and existing board blocks.
+void Game::DrawBoard() const
 {
-
     // Calculate the limits of the board in pixels
-    int mX1 = BOARD_POSITION - (BLOCK_SIZE * (BOARD_WIDTH / 2)) - 1;
-    int mX2 = BOARD_POSITION + (BLOCK_SIZE * (BOARD_WIDTH / 2));
-    int mY = mScreenHeight - (BLOCK_SIZE * BOARD_HEIGHT);
+    int posX1 = BOARD_POSITION - (BLOCK_SIZE * (BOARD_WIDTH / 2)) - 1;
+    int posX2 = BOARD_POSITION + (BLOCK_SIZE * (BOARD_WIDTH / 2));
+    int posY = screenHeight - (BLOCK_SIZE * BOARD_HEIGHT);
 
     // Check that the vertical margin is not to small
-    //assert (mY > MIN_VERTICAL_MARGIN);
+    //assert (posY > MIN_VERTICAL_MARGIN);
 
     // Rectangles that delimits the board
-    IO::DrawRectangle(mX1 - BOARD_LINE_WIDTH, mY, mX1, mScreenHeight - 1, BLUE);
+    IO::DrawRectangle(posX1 - BOARD_LINE_WIDTH, posY, posX1, screenHeight - 1, BLUE);
 
-    IO::DrawRectangle(mX2, mY, mX2 + BOARD_LINE_WIDTH, mScreenHeight - 1, BLUE);
+    IO::DrawRectangle(posX2, posY, posX2 + BOARD_LINE_WIDTH, screenHeight - 1, BLUE);
 
     // Check that the horizontal margin is not to small
-    //assert (mX1 > MIN_HORIZONTAL_MARGIN);
+    //assert (posX1 > MIN_HORIZONTAL_MARGIN);
 
     // Drawing the blocks that are already stored in the board
-    mX1 += 1;
+    posX1 += 1;
     for (int i = 0; i < BOARD_WIDTH; i++)
     {
         for (int j = 0; j < BOARD_HEIGHT; j++)
         {
             // Check if the block is filled, if so, draw it
             if (!board.IsFreeBlock(i, j))
-                IO::DrawRectangle(mX1 + i * BLOCK_SIZE,
-                    mY + j * BLOCK_SIZE,
-                    (mX1 + i * BLOCK_SIZE) + BLOCK_SIZE - 1,
-                    (mY + j * BLOCK_SIZE) + BLOCK_SIZE - 1,
+                IO::DrawRectangle(posX1 + i * BLOCK_SIZE,
+                    posY + j * BLOCK_SIZE,
+                    (posX1 + i * BLOCK_SIZE) + BLOCK_SIZE - 1,
+                    (posY + j * BLOCK_SIZE) + BLOCK_SIZE - 1,
                     RED);
         }
     }
 }
 
-// DrawScene, just calls the previous methods in order to draw everything.
-
-/*
-======================================
-Draw scene
-
-Draw all the objects of the scene
-======================================
-*/
+/// @brief Draws the board, the current piece and the next piece.
 void Game::DrawScene()
 {
     DrawBoard(); // Draw the delimitation lines and blocks stored in the board
-    DrawPiece(mPosX, mPosY, mPiece, mRotation); // Draw the playing piece
-    DrawPiece(mNextPosX, mNextPosY, mNextPiece, mNextRotation); // Draw the next piece
+    DrawPiece(posX, posY, piece, rotation); // Draw the playing piece
+    DrawPiece(nextPosX, nextPosY, nextPiece, nextRotation); // Draw the next piece
 }

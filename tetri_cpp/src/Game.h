@@ -2,39 +2,71 @@
 #ifndef GAME_H
 #define GAME_H
 
-// -- Includes --
-
 #include "Board.h"
 
-constexpr int WAIT_TIME = 700; // Number of milliseconds that the piece remains before going 1 block down */
+/// @brief Number of milliseconds that the piece remains before going 1 block down
+constexpr int WAIT_TIME = 700;
 
-// ---------------------------
-// Game
-// ---------------------------
-
+/// @brief This represents the game and its necessary operations.
 class Game
 {
 public:
 
-    Game(int pScreenHeight);
+    /// @brief Constructs the board of the game using a given size.
+    /// @param height The height of the screen in pixels.
+    Game(int height);
 
+    /// @brief Draws the board, the current piece and the next piece.
     void DrawScene();
+
+    /// @brief Sets the next piece as the current one and resets its position,
+    /// after which a new "next piece" is selected.
     void CreateNewPiece();
 
+    /// @brief The board that holds blocks after falling.
     Board board;
-    int mPosX = 0, mPosY = 0; // Position of the piece that is falling down
-    int mPiece = 0, mRotation = 0; // Kind and rotation the piece that is falling down
+
+    /// @brief x-position of the falling piece
+    int posX = 0;
+    /// @brief y-position of the falling piece
+    int posY = 0;
+    /// @brief Kind of the falling piece
+    int piece = 0;
+    /// @brief Rotation of the falling piece
+    int rotation = 0;
 
 private:
 
-    int mScreenHeight = 0; // Screen height in pixels
-    int mNextPosX = 0, mNextPosY = 0; // Position of the next piece
-    int mNextPiece = 0, mNextRotation = 0; // Kind and rotation of the next piece
+    /// @brief The screen height in pixels.
+    int screenHeight = 0;
 
+    /// @brief x-position of the next piece
+    int nextPosX = 0;
+    /// @brief y-position of the next piece
+    int nextPosY = 0;
+    /// @brief Kind of the next piece
+    int nextPiece = 0;
+    /// @brief Rotation of the next piece
+    int nextRotation = 0;
+
+    /// @brief Returns a random number between two integers.
+    /// @param a The lower end of the range.
+    /// @param b The upper end of the range.
+    /// @return A random number in the range [a, b]
     int GetRand(int pA, int pB);
+
+    /// @brief Selects the first and next piece randomly.
     void InitGame();
-    void DrawPiece(int pX, int pY, int pPiece, int pRotation);
-    void DrawBoard();
+
+    /// @brief Draws a given piece.
+    /// @param posX The x-coordinate of the piece.
+    /// @param posY The y-coordinate of the piece.
+    /// @param piece The kind of the piece.
+    /// @param rotation The rotation of the piece.
+    void DrawPiece(int posX, int posY, int piece, int rotation) const;
+
+    /// @brief Draws the board's delimiters and existing board blocks.
+    void DrawBoard() const;
 };
 
 #endif // GAME_H

@@ -1,14 +1,3 @@
-/*
-  Copyright (C) 1997-2025 Sam Lantinga <slouken@libsdl.org>
-
-  This software is provided 'as-is', without any express or implied
-  warranty.  In no event will the authors be held liable for any damages
-  arising from the use of this software.
-
-  Permission is granted to anyone to use this software for any purpose,
-  including commercial applications, and to alter it and redistribute it
-  freely.
-*/
 #define SDL_MAIN_USE_CALLBACKS 1  /* use the callbacks instead of main() */
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
@@ -73,16 +62,16 @@ SDL_AppResult SDL_AppIterate(void* appstate)
 
     if (IO::IsKeyDown(IO::Inputs::LEFT))
     {
-        if (game->board.IsPossibleMovement(game->mPosX - 1,
-            game->mPosY, game->mPiece, game->mRotation))
-            game->mPosX--;
+        if (game->board.IsPossibleMovement(game->posX - 1,
+            game->posY, game->piece, game->rotation))
+            game->posX--;
     }
 
     if (IO::IsKeyDown(IO::Inputs::RIGHT))
     {
-        if (game->board.IsPossibleMovement(game->mPosX + 1,
-            game->mPosY, game->mPiece, game->mRotation))
-            game->mPosX++;
+        if (game->board.IsPossibleMovement(game->posX + 1,
+            game->posY, game->piece, game->rotation))
+            game->posX++;
     }
 
     if (IO::IsKeyDown(IO::Inputs::UP))
@@ -92,9 +81,9 @@ SDL_AppResult SDL_AppIterate(void* appstate)
 
     if (IO::IsKeyDown(IO::Inputs::DOWN))
     {
-        if (game->board.IsPossibleMovement(game->mPosX,
-            game->mPosY + 1, game->mPiece, game->mRotation))
-            game->mPosY++;
+        if (game->board.IsPossibleMovement(game->posX,
+            game->posY + 1, game->piece, game->rotation))
+            game->posY++;
     }
 
     if (IO::IsKeyDown(IO::Inputs::ROTATE))
