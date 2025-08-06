@@ -8,19 +8,19 @@
 
 enum ColorLabel { BLACK, RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, WHITE };
 
-// ---------------------------
-// IO
-// ---------------------------
-
 namespace IO
 {
     extern AppState* appState;
-    void DrawRectangle(int pX1, int pY1, int pX2, int pY2, ColorLabel pC);
+
+    void DrawRectangle(int pX1, int pY1, int pX2, int pY2, ColorLabel colorLabel);
     void ClearScreen();
-    int Pollkey();
-    int Getkey();
-    int IsKeyDown(int pKey);
     void UpdateScreen();
+
+    enum class Inputs { RIGHT, LEFT, UP, DOWN, ROTATE, TOTAL };
+    constexpr int numInputs = static_cast<int>(IO::Inputs::TOTAL);
+
+    void PollKey(SDL_KeyboardEvent keyEvent);
+    int IsKeyDown(Inputs action);
 };
 
 #endif // IO_H

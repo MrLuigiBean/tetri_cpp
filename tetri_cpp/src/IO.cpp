@@ -31,6 +31,8 @@ namespace IO
         SaveAndLoadDrawColor& operator=(const SaveAndLoadDrawColor&) = delete;
         SaveAndLoadDrawColor& operator=(SaveAndLoadDrawColor&&) = delete;
     };
+
+    bool keyStates[numInputs] = { false };
 }
 
 struct Color { Uint8 r, g, b, a; };
@@ -54,9 +56,15 @@ static Color GetColorFromLabel(ColorLabel label)
     case YELLOW:
         return { 255, 255, 0, 255 };
     case WHITE:
-    default:
         return { 255, 255, 255, 255 };
+    default:
+        return { 0, 0, 0, 0 };
     }
+}
+
+inline static int Cast(IO::Inputs input)
+{
+    return static_cast<int>(input);
 }
 
 void IO::DrawRectangle(int pX1, int pY1, int pX2, int pY2, ColorLabel colorLabel)
@@ -86,20 +94,22 @@ void IO::ClearScreen()
     SDL_RenderClear(appState->renderer);
 }
 
-int IO::Pollkey()
+void IO::PollKey(SDL_KeyboardEvent keyEvent)
 {
-    return 0;
+    switch (keyEvent.key)
+    {
+    case SDLK_RIGHT:    IO::keyStates[Cast(Inputs::RIGHT)] = keyEvent.down; break;
+    case SDLK_LEFT:     IO::keyStates[Cast(Inputs::LEFT)] = keyEvent.down; break;
+    case SDLK_UP:       IO::keyStates[Cast(Inputs::UP)] = keyEvent.down; break;
+    case SDLK_DOWN:     IO::keyStates[Cast(Inputs::DOWN)] = keyEvent.down; break;
+    case SDLK_Z:        IO::keyStates[Cast(Inputs::ROTATE)] = keyEvent.down; break;
+    default: break;
+    }
 }
 
-int IO::Getkey()
+int IO::IsKeyDown(Inputs action)
 {
-    return 0;
-}
-
-int IO::IsKeyDown(int pKey)
-{
-    static_cast<void>(pKey);
-    return 0;
+    return keyStates[Cast(action)];
 }
 
 void IO::UpdateScreen()
