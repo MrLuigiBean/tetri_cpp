@@ -69,6 +69,38 @@ SDL_AppResult SDL_AppEvent(void* appstate, SDL_Event* event)
 SDL_AppResult SDL_AppIterate(void* appstate)
 {
     AppState* state = static_cast<AppState*>(appstate);
+    Game* game = static_cast<Game*>(state->game);
+
+    if (IO::IsKeyDown(IO::Inputs::LEFT))
+    {
+        if (game->board.IsPossibleMovement(game->mPosX - 1,
+            game->mPosY, game->mPiece, game->mRotation))
+            game->mPosX--;
+    }
+
+    if (IO::IsKeyDown(IO::Inputs::RIGHT))
+    {
+        if (game->board.IsPossibleMovement(game->mPosX + 1,
+            game->mPosY, game->mPiece, game->mRotation))
+            game->mPosX++;
+    }
+
+    if (IO::IsKeyDown(IO::Inputs::UP))
+    {
+        ;
+    }
+
+    if (IO::IsKeyDown(IO::Inputs::DOWN))
+    {
+        if (game->board.IsPossibleMovement(game->mPosX,
+            game->mPosY + 1, game->mPiece, game->mRotation))
+            game->mPosY++;
+    }
+
+    if (IO::IsKeyDown(IO::Inputs::ROTATE))
+    {
+        ;
+    }
 
     const char* message = "Hello World!";
     int w = 0, h = 0;
@@ -82,7 +114,7 @@ SDL_AppResult SDL_AppIterate(void* appstate)
     IO::ClearScreen();
     SDL_SetRenderDrawColor(state->renderer, 255, 255, 255, 255);
     SDL_RenderDebugText(state->renderer, x, y, message);
-    state->game->DrawScene();
+    game->DrawScene();
     IO::UpdateScreen();
 
     IO::ClearKeyStates();

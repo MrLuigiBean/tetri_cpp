@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <time.h>
 
-Game::Game(int pScreenHeight) : mScreenHeight{ pScreenHeight }, mBoard{ Board(pScreenHeight) } {}
+Game::Game(int pScreenHeight) : mScreenHeight{ pScreenHeight }, board{ Board(pScreenHeight) } {}
 
 // GetRand is a trivial method that returns a random number between two boundaries.
 
@@ -86,8 +86,8 @@ void Game::DrawPiece(int pX, int pY, int pPiece, int pRotation)
     ColorLabel mColor = ColorLabel::BLUE; // Color of the block
 
     // Obtain the position in pixel in the screen of the block we want to draw
-    int mPixelsX = mBoard.GetXPosInPixels(pX);
-    int mPixelsY = mBoard.GetYPosInPixels(pY);
+    int mPixelsX = board.GetXPosInPixels(pX);
+    int mPixelsY = board.GetYPosInPixels(pY);
 
     // Travel the matrix of blocks of the piece and draw the blocks that are filled
     for (int i = 0; i < PIECE_BLOCKS; i++)
@@ -146,7 +146,7 @@ void Game::DrawBoard()
         for (int j = 0; j < BOARD_HEIGHT; j++)
         {
             // Check if the block is filled, if so, draw it
-            if (!mBoard.IsFreeBlock(i, j))
+            if (!board.IsFreeBlock(i, j))
                 IO::DrawRectangle(mX1 + i * BLOCK_SIZE,
                     mY + j * BLOCK_SIZE,
                     (mX1 + i * BLOCK_SIZE) + BLOCK_SIZE - 1,

@@ -21,16 +21,15 @@ public:
     void DrawScene();
     void CreateNewPiece();
 
-    int mPosX, mPosY; // Position of the piece that is falling down
-    int mPiece, mRotation; // Kind and rotation the piece that is falling down
+    Board board;
+    int mPosX = 0, mPosY = 0; // Position of the piece that is falling down
+    int mPiece = 0, mRotation = 0; // Kind and rotation the piece that is falling down
 
 private:
 
-    int mScreenHeight; // Screen height in pixels
-    int mNextPosX, mNextPosY; // Position of the next piece
-    int mNextPiece, mNextRotation; // Kind and rotation of the next piece
-
-    Board mBoard;
+    int mScreenHeight = 0; // Screen height in pixels
+    int mNextPosX = 0, mNextPosY = 0; // Position of the next piece
+    int mNextPiece = 0, mNextRotation = 0; // Kind and rotation of the next piece
 
     int GetRand(int pA, int pB);
     void InitGame();
