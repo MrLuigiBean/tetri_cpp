@@ -5,7 +5,7 @@
 #include "Board.h"
 
 /// @brief Number of milliseconds that the piece remains before going 1 block down
-constexpr int WAIT_TIME = 700;
+constexpr int PIECE_MOVEMENT_TIME_INTERVAL = 700;
 
 /// @brief This represents the game and its necessary operations.
 class Game

@@ -59,6 +59,9 @@ SDL_AppResult SDL_AppIterate(void* appstate)
 {
     AppState* state = static_cast<AppState*>(appstate);
     Game* game = static_cast<Game*>(state->game);
+    static auto timeSinceLastMovement = SDL_GetTicks();
+
+#pragma region Input
 
     if (IO::IsKeyDown(IO::Inputs::LEFT))
     {
@@ -105,6 +108,41 @@ SDL_AppResult SDL_AppIterate(void* appstate)
             game->rotation = (game->rotation + 1) % 4;
     }
 
+#pragma endregion
+
+#pragma region Update
+
+    auto currentTime = SDL_GetTicks();
+
+    if ((currentTime - timeSinceLastMovement) > PIECE_MOVEMENT_TIME_INTERVAL)
+    {
+        if (game->board.IsPossibleMovement(game->posX, game->posY + 1,
+            game->piece, game->rotation))
+        {
+            game->posY++;
+        }
+        else
+        {
+            game->board.StorePiece(game->posX, game->posY, game->piece, game->rotation);
+
+            game->board.DeletePossibleLines();
+
+            if (game->board.IsGameOver())
+            {
+                return SDL_APP_SUCCESS;
+            }
+
+            game->CreateNewPiece();
+        }
+
+        timeSinceLastMovement = SDL_GetTicks();
+    }
+
+
+#pragma endregion
+
+#pragma region Render
+
     const char* message = "Hello World!";
     int w = 0, h = 0;
 
@@ -119,6 +157,8 @@ SDL_AppResult SDL_AppIterate(void* appstate)
     SDL_RenderDebugText(state->renderer, x, y, message);
     game->DrawScene();
     IO::UpdateScreen();
+
+#pragma endregion
 
     IO::ClearKeyStates();
 
