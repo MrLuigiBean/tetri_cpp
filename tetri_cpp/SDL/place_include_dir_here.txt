@@ -1,0 +1,2 @@
+Inside this include directory, there should be one folder named "SDL".
+Inside that folder, it should contain the many header files SDL exposes.

@@ -1,0 +1,3 @@
+Inside this lib directory, there should be at least two items.
+The first is SDL3.dll.
+The second is SDL3.lib.

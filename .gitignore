@@ -416,3 +416,8 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# SDL Library stuff
+tetri_cpp/SDL/
+!tetri_cpp/SDL/place_include_dir_here.txt
+!tetri_cpp/SDL/place_libs_dir_here.txt
