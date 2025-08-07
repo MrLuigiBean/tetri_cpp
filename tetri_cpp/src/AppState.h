@@ -9,7 +9,7 @@ struct AppState
 {
     /// @brief The pointer to the window created by SDL.
     SDL_Window* window = nullptr;
-    
+
     /// @brief The pointer to the renderer created by SDL.
     SDL_Renderer* renderer = nullptr;
 
