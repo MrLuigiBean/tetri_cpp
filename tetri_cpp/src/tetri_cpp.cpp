@@ -84,7 +84,7 @@ SDL_AppResult SDL_AppIterate(void* appstate)
             game->fallingPiece.piece, game->fallingPiece.rotation))
             game->fallingPiece.posY++;
 
-        game->board.StorePiece(game->fallingPiece.posX, game->fallingPiece.posY - 1, game->fallingPiece.piece, game->fallingPiece.rotation);
+        game->board.StorePiece(game->fallingPiece.If({ .modPosY = -1 }));
 
         game->board.DeletePossibleLines();
 
@@ -124,7 +124,7 @@ SDL_AppResult SDL_AppIterate(void* appstate)
         }
         else
         {
-            game->board.StorePiece(game->fallingPiece.posX, game->fallingPiece.posY, game->fallingPiece.piece, game->fallingPiece.rotation);
+            game->board.StorePiece(game->fallingPiece);
 
             game->board.DeletePossibleLines();
 

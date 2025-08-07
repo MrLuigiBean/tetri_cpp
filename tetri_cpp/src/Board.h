@@ -62,11 +62,8 @@ public:
     bool IsPossibleMovement(int posX, int posY, int piece, int rotation) const;
 
     /// @brief Store a piece in the board by filling in its blocks.
-    /// @param posX The x-coordinate of the piece.
-    /// @param posY The y-coordinate of the piece.
-    /// @param piece The kind of the piece.
-    /// @param rotation The rotation of the piece.
-    void StorePiece(int posX, int posY, int piece, int rotation);
+    /// @param pieceState The state of a piece.
+    void StorePiece(const PieceState& pieceState);
 
     /// @brief Determines which lines to clear and removes them from the board.
     void DeletePossibleLines();
@@ -87,7 +84,7 @@ private:
     };
 
     /// @brief Represents the board containing the blocks from fallen pieces.
-    char board[BOARD_WIDTH][BOARD_HEIGHT] = { 0 };
+    char board[BOARD_WIDTH][BOARD_HEIGHT] = { POS_FREE };
 
     /// @brief The height of the board in pixels.
     int boardHeight = 0;

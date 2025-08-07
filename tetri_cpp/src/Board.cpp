@@ -13,19 +13,18 @@ void Board::InitBoard()
 }
 
 /// @brief Store a piece in the board by filling in its blocks.
-/// @param posX The x-coordinate of the piece.
-/// @param posY The y-coordinate of the piece.
-/// @param piece The kind of the piece.
-/// @param rotation The rotation of the piece.
-void Board::StorePiece(int posX, int posY, int piece, int rotation)
+/// @param pieceState The state of a piece.
+void Board::StorePiece(const PieceState& pieceState)
 {
     // Store each block of the piece into the board
-    for (int i1 = posX, i2 = 0; i1 < posX + PIECE_BLOCKS; i1++, i2++)
+    for (int i1 = pieceState.posX, i2 = 0;
+        i1 < pieceState.posX + PIECE_BLOCKS; i1++, i2++)
     {
-        for (int j1 = posY, j2 = 0; j1 < posY + PIECE_BLOCKS; j1++, j2++)
+        for (int j1 = pieceState.posY, j2 = 0;
+            j1 < pieceState.posY + PIECE_BLOCKS; j1++, j2++)
         {
             // Store only the blocks of the piece that are not holes
-            if (Pieces::GetBlockType({ j2, i2, piece, rotation }) != 0)
+            if (Pieces::GetBlockType({ j2, i2, pieceState.piece, pieceState.rotation }) != 0)
                 board[i1][j1] = POS_FILLED;
         }
     }

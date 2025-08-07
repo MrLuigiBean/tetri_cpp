@@ -17,6 +17,28 @@ struct PieceState
 
     /// @brief The rotation of the piece.
     int rotation = 0;
+
+    /// @brief Represents the modifications that can be made to a PieceState.
+    struct IfArgs
+    {
+        /// @brief The desired modification to the piece's x-coordinate.
+        int modPosX = 0;
+
+        /// @brief The desired modification to the piece's y-coordinate.
+        int modPosY = 0;
+
+        /// @brief The desired modification to the piece's rotation.
+        int modRotation = 0;
+    };
+
+    /// @brief Creates a new PieceState, which is a copy of this instance with modifications.
+    /// @param args The modifications to apply.
+    /// @return A copy of the piece with the modifications applied.
+    inline PieceState If(const IfArgs& args)
+    {
+        // TODO: get the `4` here in a nicer way...
+        return { posX + args.modPosX, posY + args.modPosY, piece, (rotation + args.modRotation) % 4 };
+    }
 };
 
 namespace Pieces
