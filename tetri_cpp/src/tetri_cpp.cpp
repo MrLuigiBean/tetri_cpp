@@ -76,7 +76,20 @@ SDL_AppResult SDL_AppIterate(void* appstate)
 
     if (IO::IsKeyDown(IO::Inputs::DROP))
     {
-        ;
+        while (game->board.IsPossibleMovement(game->posX, game->posY,
+            game->piece, game->rotation))
+            game->posY++;
+
+        game->board.StorePiece(game->posX, game->posY - 1, game->piece, game->rotation);
+
+        game->board.DeletePossibleLines();
+
+        if (game->board.IsGameOver())
+        {
+            return SDL_APP_SUCCESS;
+        }
+
+        game->CreateNewPiece();
     }
 
     if (IO::IsKeyDown(IO::Inputs::DOWN))
@@ -88,7 +101,8 @@ SDL_AppResult SDL_AppIterate(void* appstate)
 
     if (IO::IsKeyDown(IO::Inputs::ROTATE))
     {
-        ;
+        if (game->board.IsPossibleMovement(game->posX, game->posY, game->piece, (game->rotation + 1) % 4))
+            game->rotation = (game->rotation + 1) % 4;
     }
 
     const char* message = "Hello World!";
