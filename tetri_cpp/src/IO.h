@@ -53,7 +53,7 @@ namespace IO
     void UpdateScreen();
 
     /// @brief This class represents what possible inputs are present for this application.
-    enum class Inputs { RIGHT, LEFT, UP, DOWN, ROTATE, TOTAL };
+    enum class Inputs { RIGHT, LEFT, DROP, DOWN, ROTATE, TOTAL };
 
     /// @brief The total number of inputs possible, as described in IO::Inputs.
     constexpr int numInputs = static_cast<int>(IO::Inputs::TOTAL);

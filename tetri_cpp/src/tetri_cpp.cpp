@@ -74,7 +74,7 @@ SDL_AppResult SDL_AppIterate(void* appstate)
             game->posX++;
     }
 
-    if (IO::IsKeyDown(IO::Inputs::UP))
+    if (IO::IsKeyDown(IO::Inputs::DROP))
     {
         ;
     }

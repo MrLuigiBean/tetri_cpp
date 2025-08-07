@@ -142,9 +142,9 @@ void IO::PollKey(SDL_KeyboardEvent keyEvent)
     {
     case SDLK_RIGHT:    IO::keyStates[Cast(Inputs::RIGHT)] = keyEvent.down; break;
     case SDLK_LEFT:     IO::keyStates[Cast(Inputs::LEFT)] = keyEvent.down; break;
-    case SDLK_UP:       IO::keyStates[Cast(Inputs::UP)] = keyEvent.down; break;
+    case SDLK_SPACE:       IO::keyStates[Cast(Inputs::DROP)] = keyEvent.down; break;
     case SDLK_DOWN:     IO::keyStates[Cast(Inputs::DOWN)] = keyEvent.down; break;
-    case SDLK_Z:        IO::keyStates[Cast(Inputs::ROTATE)] = keyEvent.down; break;
+    case SDLK_UP:        IO::keyStates[Cast(Inputs::ROTATE)] = keyEvent.down; break;
     default: break;
     }
 }
