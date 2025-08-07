@@ -3,6 +3,8 @@
 #ifndef PIECES_H
 #define PIECES_H
 
+#include "PieceData.h"
+
 /// @brief Represents a state a piece can be in.
 struct PieceState
 {
@@ -36,8 +38,8 @@ struct PieceState
     /// @return A copy of the piece with the modifications applied.
     inline PieceState If(const IfArgs& args)
     {
-        // TODO: get the `4` here in a nicer way...
-        return { posX + args.modPosX, posY + args.modPosY, piece, (rotation + args.modRotation) % 4 };
+        return { posX + args.modPosX, posY + args.modPosY, piece,
+            (rotation + args.modRotation) % TOTAL_ROTATIONS };
     }
 };
 

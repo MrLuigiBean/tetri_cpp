@@ -64,13 +64,11 @@ void Board::DeletePossibleLines()
 {
     for (int j = 0; j < BOARD_HEIGHT; j++)
     {
-        // TODO: This is just a for loop bro...
         int i = 0;
-        while (i < BOARD_WIDTH)
+        for (; i < BOARD_WIDTH; ++i)
         {
             if (board[i][j] != POS_FILLED)
                 break;
-            i++;
         }
 
         if (i == BOARD_WIDTH)

@@ -1,7 +1,7 @@
 #include "Game.h"
 #include "IO.h"
 #include <cstdlib>
-#include <time.h>
+#include <ctime>
 
 /// @brief Constructs the board of the game using a given size.
 /// @param height The height of the screen in pixels.
@@ -20,17 +20,17 @@ int Game::GetRand(int a, int b)
 void Game::InitGame()
 {
     // Init random numbers
-    srand((unsigned int)time(NULL));
+    srand(static_cast<unsigned int>(time(NULL)));
 
     // First piece
-    fallingPiece.piece = GetRand(0, 6);
-    fallingPiece.rotation = GetRand(0, 3);
+    fallingPiece.piece = GetRand(0, TOTAL_KINDS - 1);
+    fallingPiece.rotation = GetRand(0, TOTAL_ROTATIONS - 1);
     fallingPiece.posX = (BOARD_WIDTH / 2) + Pieces::GetXInitialPosition(fallingPiece.piece, fallingPiece.rotation);
     fallingPiece.posY = Pieces::GetYInitialPosition(fallingPiece.piece, fallingPiece.rotation);
 
     // Next piece
-    nextPiece.piece = GetRand(0, 6);
-    nextPiece.rotation = GetRand(0, 3);
+    nextPiece.piece = GetRand(0, TOTAL_KINDS - 1);
+    nextPiece.rotation = GetRand(0, TOTAL_ROTATIONS - 1);
     nextPiece.posX = BOARD_WIDTH + 5;
     nextPiece.posY = 5;
 }
@@ -46,8 +46,8 @@ void Game::CreateNewPiece()
     fallingPiece.posY = Pieces::GetYInitialPosition(fallingPiece.piece, fallingPiece.rotation);
 
     // Random next piece
-    nextPiece.piece = GetRand(0, 6);
-    nextPiece.rotation = GetRand(0, 3);
+    nextPiece.piece = GetRand(0, TOTAL_KINDS - 1);
+    nextPiece.rotation = GetRand(0, TOTAL_ROTATIONS - 1);
 }
 
 /// @brief Draws a given piece.
