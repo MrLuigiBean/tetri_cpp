@@ -25,7 +25,7 @@ void Board::StorePiece(int posX, int posY, int piece, int rotation)
         for (int j1 = posY, j2 = 0; j1 < posY + PIECE_BLOCKS; j1++, j2++)
         {
             // Store only the blocks of the piece that are not holes
-            if (Pieces::GetBlockType(piece, rotation, j2, i2) != 0)
+            if (Pieces::GetBlockType({ j2, i2, piece, rotation }) != 0)
                 board[i1][j1] = POS_FILLED;
         }
     }
@@ -118,20 +118,21 @@ bool Board::IsPossibleMovement(int posX, int posY, int piece, int rotation) cons
     {
         for (int j1 = posY, j2 = 0; j1 < posY + PIECE_BLOCKS; j1++, j2++)
         {
+            int blockType = Pieces::GetBlockType({ j2, i2, piece, rotation });
+
             // Check if the piece is outside the limits of the board
             if (i1 < 0 ||
                 i1 > BOARD_WIDTH - 1 ||
                 j1 > BOARD_HEIGHT - 1)
             {
-                if (Pieces::GetBlockType(piece, rotation, j2, i2) != 0)
-                    return 0;
+                if (blockType != 0)
+                    return false;
             }
 
             // Check if the piece has collided with a block already stored in the map
             if (j1 >= 0)
             {
-                if ((Pieces::GetBlockType(piece, rotation, j2, i2) != 0) &&
-                    (!IsFreeBlock(i1, j1)))
+                if (blockType != 0 && !IsFreeBlock(i1, j1))
                     return false;
             }
         }

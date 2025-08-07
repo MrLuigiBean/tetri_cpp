@@ -69,14 +69,16 @@ void Game::DrawPiece(int posX, int posY, int piece, int rotation) const
     {
         for (int j = 0; j < PIECE_BLOCKS; j++)
         {
+            int blockType = Pieces::GetBlockType({ j, i, piece, rotation });
+
             // Get the type of the block and draw it with the correct color
-            switch (Pieces::GetBlockType(piece, rotation, j, i))
+            switch (blockType)
             {
             case 1: col = GREEN; break; // For each block of the piece except the pivot
             case 2: col = BLUE; break; // For the pivot
             }
 
-            if (Pieces::GetBlockType(piece, rotation, j, i) != 0)
+            if (blockType != 0)
                 IO::DrawRectangle(pixelsX + i * BLOCK_SIZE,
                     pixelsY + j * BLOCK_SIZE,
                     (pixelsX + i * BLOCK_SIZE) + BLOCK_SIZE - 1,

@@ -13,7 +13,7 @@ constexpr int FRAME_SIZE = 5;
 constexpr int COORDINATES_DIMENSION = 2;
 
 /// @brief A table containing tile data for each rotation of a piece.
-char mPieces[TOTAL_KINDS][TOTAL_ROTATIONS][FRAME_SIZE][FRAME_SIZE] =
+char allPieceRotations[TOTAL_KINDS][TOTAL_ROTATIONS][FRAME_SIZE][FRAME_SIZE] =
 {
     // Square
     {
@@ -242,7 +242,7 @@ char mPieces[TOTAL_KINDS][TOTAL_ROTATIONS][FRAME_SIZE][FRAME_SIZE] =
 
 /// @brief A table containing the initial displacement from the board's top
 /// for each rotation of a piece.
-int mPiecesInitialPosition[TOTAL_KINDS][TOTAL_ROTATIONS][COORDINATES_DIMENSION] =
+int allPieceInitialPositions[TOTAL_KINDS][TOTAL_ROTATIONS][COORDINATES_DIMENSION] =
 {
     // Square
     {
