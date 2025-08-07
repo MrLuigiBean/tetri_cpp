@@ -14,6 +14,7 @@
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\IO.cpp" />
+    <ClCompile Include="src\PieceData.cpp" />
     <ClCompile Include="src\Pieces.cpp" />
     <ClCompile Include="src\tetri_cpp.cpp" />
   </ItemGroup>
