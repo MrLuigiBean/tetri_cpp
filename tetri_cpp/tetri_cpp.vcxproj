@@ -60,12 +60,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)SDL\SDL3-3.2.18\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)SDL\SDL3-3.2.18\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)SDL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)SDL\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)SDL\SDL3-3.2.18\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)SDL\SDL3-3.2.18\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)SDL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)SDL\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -82,7 +82,7 @@
       <AdditionalDependencies>SDL3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)SDL\SDL3-3.2.18\lib\x64\SDL3.dll" "$(TargetDir)"
+      <Command>xcopy /Y "$(SolutionDir)SDL\lib\x64\SDL3.dll" "$(TargetDir)"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -105,7 +105,7 @@
       <AdditionalDependencies>SDL3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)SDL\SDL3-3.2.18\lib\x64\SDL3.dll" "$(TargetDir)"
+      <Command>xcopy /Y "$(SolutionDir)SDL\lib\x64\SDL3.dll" "$(TargetDir)"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
