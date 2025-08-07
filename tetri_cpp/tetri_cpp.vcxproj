@@ -16,7 +16,7 @@
     <ClCompile Include="src\IO.cpp" />
     <ClCompile Include="src\PieceData.cpp" />
     <ClCompile Include="src\Pieces.cpp" />
-    <ClCompile Include="src\tetri_cpp.cpp" />
+    <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Board.h" />
