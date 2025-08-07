@@ -13,10 +13,12 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
     static AppState state{};
 
     /* Create the window */
-    if (!SDL_CreateWindowAndRenderer("Hello World", 800, 600, SDL_WINDOW_FULLSCREEN, &state.window, &state.renderer)) {
+    if (!SDL_CreateWindowAndRenderer("Hello World", 1920, 1080, SDL_WINDOW_RESIZABLE, &state.window, &state.renderer)) {
         SDL_Log("Couldn't create window and renderer: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     }
+
+    SDL_MaximizeWindow(state.window);
 
     int screenHeight;
     {
