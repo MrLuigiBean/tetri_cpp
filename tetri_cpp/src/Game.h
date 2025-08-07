@@ -34,20 +34,14 @@ private:
     /// @brief The screen height in pixels.
     int screenHeight = 0;
 
-    /// @brief x-position of the next piece
-    int nextPosX = 0;
-    /// @brief y-position of the next piece
-    int nextPosY = 0;
-    /// @brief Kind of the next piece
-    int nextPiece = 0;
-    /// @brief Rotation of the next piece
-    int nextRotation = 0;
+    /// @brief Contains information of the next piece in queue.
+    PieceState nextPiece;
 
     /// @brief Returns a random number between two integers.
     /// @param a The lower end of the range.
     /// @param b The upper end of the range.
     /// @return A random number in the range [a, b]
-    int GetRand(int pA, int pB);
+    int GetRand(int a, int b);
 
     /// @brief Selects the first and next piece randomly.
     void InitGame();
