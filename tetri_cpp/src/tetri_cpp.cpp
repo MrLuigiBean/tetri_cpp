@@ -65,25 +65,26 @@ SDL_AppResult SDL_AppIterate(void* appstate)
 
     if (IO::IsKeyDown(IO::Inputs::LEFT))
     {
-        if (game->board.IsPossibleMovement(game->posX - 1,
-            game->posY, game->piece, game->rotation))
-            game->posX--;
+        if (game->board.IsPossibleMovement(game->fallingPiece.posX - 1,
+            game->fallingPiece.posY, game->fallingPiece.piece,
+            game->fallingPiece.rotation))
+            game->fallingPiece.posX--;
     }
 
     if (IO::IsKeyDown(IO::Inputs::RIGHT))
     {
-        if (game->board.IsPossibleMovement(game->posX + 1,
-            game->posY, game->piece, game->rotation))
-            game->posX++;
+        if (game->board.IsPossibleMovement(game->fallingPiece.posX + 1,
+            game->fallingPiece.posY, game->fallingPiece.piece, game->fallingPiece.rotation))
+            game->fallingPiece.posX++;
     }
 
     if (IO::IsKeyDown(IO::Inputs::DROP))
     {
-        while (game->board.IsPossibleMovement(game->posX, game->posY,
-            game->piece, game->rotation))
-            game->posY++;
+        while (game->board.IsPossibleMovement(game->fallingPiece.posX, game->fallingPiece.posY,
+            game->fallingPiece.piece, game->fallingPiece.rotation))
+            game->fallingPiece.posY++;
 
-        game->board.StorePiece(game->posX, game->posY - 1, game->piece, game->rotation);
+        game->board.StorePiece(game->fallingPiece.posX, game->fallingPiece.posY - 1, game->fallingPiece.piece, game->fallingPiece.rotation);
 
         game->board.DeletePossibleLines();
 
@@ -97,15 +98,15 @@ SDL_AppResult SDL_AppIterate(void* appstate)
 
     if (IO::IsKeyDown(IO::Inputs::DOWN))
     {
-        if (game->board.IsPossibleMovement(game->posX,
-            game->posY + 1, game->piece, game->rotation))
-            game->posY++;
+        if (game->board.IsPossibleMovement(game->fallingPiece.posX,
+            game->fallingPiece.posY + 1, game->fallingPiece.piece, game->fallingPiece.rotation))
+            game->fallingPiece.posY++;
     }
 
     if (IO::IsKeyDown(IO::Inputs::ROTATE))
     {
-        if (game->board.IsPossibleMovement(game->posX, game->posY, game->piece, (game->rotation + 1) % 4))
-            game->rotation = (game->rotation + 1) % 4;
+        if (game->board.IsPossibleMovement(game->fallingPiece.posX, game->fallingPiece.posY, game->fallingPiece.piece, (game->fallingPiece.rotation + 1) % 4))
+            game->fallingPiece.rotation = (game->fallingPiece.rotation + 1) % 4;
     }
 
 #pragma endregion
@@ -116,14 +117,14 @@ SDL_AppResult SDL_AppIterate(void* appstate)
 
     if ((currentTime - timeSinceLastMovement) > PIECE_MOVEMENT_TIME_INTERVAL)
     {
-        if (game->board.IsPossibleMovement(game->posX, game->posY + 1,
-            game->piece, game->rotation))
+        if (game->board.IsPossibleMovement(game->fallingPiece.posX, game->fallingPiece.posY + 1,
+            game->fallingPiece.piece, game->fallingPiece.rotation))
         {
-            game->posY++;
+            game->fallingPiece.posY++;
         }
         else
         {
-            game->board.StorePiece(game->posX, game->posY, game->piece, game->rotation);
+            game->board.StorePiece(game->fallingPiece.posX, game->fallingPiece.posY, game->fallingPiece.piece, game->fallingPiece.rotation);
 
             game->board.DeletePossibleLines();
 

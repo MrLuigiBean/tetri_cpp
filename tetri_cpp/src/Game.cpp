@@ -24,10 +24,10 @@ void Game::InitGame()
     srand((unsigned int)time(NULL));
 
     // First piece
-    piece = GetRand(0, 6);
-    rotation = GetRand(0, 3);
-    posX = (BOARD_WIDTH / 2) + Pieces::GetXInitialPosition(piece, rotation);
-    posY = Pieces::GetYInitialPosition(piece, rotation);
+    fallingPiece.piece = GetRand(0, 6);
+    fallingPiece.rotation = GetRand(0, 3);
+    fallingPiece.posX = (BOARD_WIDTH / 2) + Pieces::GetXInitialPosition(fallingPiece.piece, fallingPiece.rotation);
+    fallingPiece.posY = Pieces::GetYInitialPosition(fallingPiece.piece, fallingPiece.rotation);
 
     // Next piece
     nextPiece = GetRand(0, 6);
@@ -41,10 +41,10 @@ void Game::InitGame()
 void Game::CreateNewPiece()
 {
     // The new piece
-    piece = nextPiece;
-    rotation = nextRotation;
-    posX = (BOARD_WIDTH / 2) + Pieces::GetXInitialPosition(piece, rotation);
-    posY = Pieces::GetYInitialPosition(piece, rotation);
+    fallingPiece.piece = nextPiece;
+    fallingPiece.rotation = nextRotation;
+    fallingPiece.posX = (BOARD_WIDTH / 2) + Pieces::GetXInitialPosition(fallingPiece.piece, fallingPiece.rotation);
+    fallingPiece.posY = Pieces::GetYInitialPosition(fallingPiece.piece, fallingPiece.rotation);
 
     // Random next piece
     nextPiece = GetRand(0, 6);
@@ -128,6 +128,6 @@ void Game::DrawBoard() const
 void Game::DrawScene()
 {
     DrawBoard(); // Draw the delimitation lines and blocks stored in the board
-    DrawPiece(posX, posY, piece, rotation); // Draw the playing piece
+    DrawPiece(fallingPiece.posX, fallingPiece.posY, fallingPiece.piece, fallingPiece.rotation); // Draw the playing piece
     DrawPiece(nextPosX, nextPosY, nextPiece, nextRotation); // Draw the next piece
 }

@@ -23,17 +23,11 @@ public:
     /// after which a new "next piece" is selected.
     void CreateNewPiece();
 
-    /// @brief The board that holds blocks after falling.
+    /// @brief The board that holds fallen blocks.
     Board board;
 
-    /// @brief x-position of the falling piece
-    int posX = 0;
-    /// @brief y-position of the falling piece
-    int posY = 0;
-    /// @brief Kind of the falling piece
-    int piece = 0;
-    /// @brief Rotation of the falling piece
-    int rotation = 0;
+    /// @brief Contains information of the piece currently falling.
+    PieceState fallingPiece;
 
 private:
 

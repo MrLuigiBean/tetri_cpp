@@ -7,16 +7,16 @@
 struct PieceState
 {
     /// @brief The x-coordinate of the piece.
-    int posX;
+    int posX = 0;
 
     /// @brief The y-coordinate of the piece.
-    int posY;
+    int posY = 0;
 
     /// @brief The kind/shape of the piece.
-    int piece;
+    int piece = 0;
 
     /// @brief The rotation of the piece.
-    int rotation;
+    int rotation = 0;
 };
 
 namespace Pieces
