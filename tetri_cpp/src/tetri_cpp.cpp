@@ -65,23 +65,31 @@ SDL_AppResult SDL_AppIterate(void* appstate)
 
     if (IO::IsKeyDown(IO::Inputs::LEFT))
     {
-        if (game->board.IsPossibleMovement(game->fallingPiece.posX - 1,
-            game->fallingPiece.posY, game->fallingPiece.piece,
-            game->fallingPiece.rotation))
+        if (game->board.IsPossibleMovement(game->fallingPiece.If({ .modPosX = -1 })))
             game->fallingPiece.posX--;
     }
 
     if (IO::IsKeyDown(IO::Inputs::RIGHT))
     {
-        if (game->board.IsPossibleMovement(game->fallingPiece.posX + 1,
-            game->fallingPiece.posY, game->fallingPiece.piece, game->fallingPiece.rotation))
+        if (game->board.IsPossibleMovement(game->fallingPiece.If({ .modPosX = +1 })))
             game->fallingPiece.posX++;
+    }
+
+    if (IO::IsKeyDown(IO::Inputs::DOWN))
+    {
+        if (game->board.IsPossibleMovement(game->fallingPiece.If({ .modPosY = +1 })))
+            game->fallingPiece.posY++;
+    }
+
+    if (IO::IsKeyDown(IO::Inputs::ROTATE))
+    {
+        if (game->board.IsPossibleMovement(game->fallingPiece.If({ .modRotation = +1 })))
+            game->fallingPiece.rotation = (game->fallingPiece.rotation + 1) % 4;
     }
 
     if (IO::IsKeyDown(IO::Inputs::DROP))
     {
-        while (game->board.IsPossibleMovement(game->fallingPiece.posX, game->fallingPiece.posY,
-            game->fallingPiece.piece, game->fallingPiece.rotation))
+        while (game->board.IsPossibleMovement(game->fallingPiece))
             game->fallingPiece.posY++;
 
         game->board.StorePiece(game->fallingPiece.If({ .modPosY = -1 }));
@@ -96,19 +104,6 @@ SDL_AppResult SDL_AppIterate(void* appstate)
         game->CreateNewPiece();
     }
 
-    if (IO::IsKeyDown(IO::Inputs::DOWN))
-    {
-        if (game->board.IsPossibleMovement(game->fallingPiece.posX,
-            game->fallingPiece.posY + 1, game->fallingPiece.piece, game->fallingPiece.rotation))
-            game->fallingPiece.posY++;
-    }
-
-    if (IO::IsKeyDown(IO::Inputs::ROTATE))
-    {
-        if (game->board.IsPossibleMovement(game->fallingPiece.posX, game->fallingPiece.posY, game->fallingPiece.piece, (game->fallingPiece.rotation + 1) % 4))
-            game->fallingPiece.rotation = (game->fallingPiece.rotation + 1) % 4;
-    }
-
 #pragma endregion
 
 #pragma region Update
@@ -117,8 +112,7 @@ SDL_AppResult SDL_AppIterate(void* appstate)
 
     if ((currentTime - timeSinceLastMovement) > PIECE_MOVEMENT_TIME_INTERVAL)
     {
-        if (game->board.IsPossibleMovement(game->fallingPiece.posX, game->fallingPiece.posY + 1,
-            game->fallingPiece.piece, game->fallingPiece.rotation))
+        if (game->board.IsPossibleMovement(game->fallingPiece.If({ .modPosY = +1 })))
         {
             game->fallingPiece.posY++;
         }

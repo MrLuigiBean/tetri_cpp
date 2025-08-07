@@ -54,12 +54,9 @@ public:
     bool IsFreeBlock(int posX, int posY) const;
 
     /// @brief Check if a given piece can be stored at this position on the board.
-    /// @param posX The x-coordinate of the position to check.
-    /// @param posY The y-coordinate of the position to check.
-    /// @param piece The kind of piece.
-    /// @param rotation The rotation of the piece.
+    /// @param pieceState The state of a piece.
     /// @return `true` if the movement is allowed, `false` otherwise.
-    bool IsPossibleMovement(int posX, int posY, int piece, int rotation) const;
+    bool IsPossibleMovement(const PieceState& pieceState) const;
 
     /// @brief Store a piece in the board by filling in its blocks.
     /// @param pieceState The state of a piece.

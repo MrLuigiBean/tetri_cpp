@@ -104,20 +104,19 @@ int Board::GetYPosInPixels(int posY) const
 }
 
 /// @brief Check if a given piece can be stored at this position on the board.
-/// @param posX The x-coordinate of the position to check.
-/// @param posY The y-coordinate of the position to check.
-/// @param piece The kind of piece.
-/// @param rotation The rotation of the piece.
+/// @param pieceState The state of a piece.
 /// @return `true` if the movement is allowed, `false` otherwise.
-bool Board::IsPossibleMovement(int posX, int posY, int piece, int rotation) const
+bool Board::IsPossibleMovement(const PieceState& pieceState) const
 {
     // Checks collision with pieces already stored in the board or the board limits
     // This is just to check the 5x5 blocks of a piece with the appropriate area in the board
-    for (int i1 = posX, i2 = 0; i1 < posX + PIECE_BLOCKS; i1++, i2++)
+    for (int i1 = pieceState.posX, i2 = 0;
+        i1 < pieceState.posX + PIECE_BLOCKS; i1++, i2++)
     {
-        for (int j1 = posY, j2 = 0; j1 < posY + PIECE_BLOCKS; j1++, j2++)
+        for (int j1 = pieceState.posY, j2 = 0;
+            j1 < pieceState.posY + PIECE_BLOCKS; j1++, j2++)
         {
-            int blockType = Pieces::GetBlockType({ j2, i2, piece, rotation });
+            int blockType = Pieces::GetBlockType({ j2, i2, pieceState.piece, pieceState.rotation });
 
             // Check if the piece is outside the limits of the board
             if (i1 < 0 ||
