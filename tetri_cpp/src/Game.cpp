@@ -5,7 +5,7 @@
 
 /// @brief Constructs the board of the game using a given size.
 /// @param height The height of the screen in pixels.
-Game::Game(int height) : screenHeight{ height }, board{ Board(height) } {}
+Game::Game(int height) : screenHeight{ height }, board{ Board(height) } { InitGame(); }
 
 /// @brief Returns a random number between two integers.
 /// @param a The lower end of the range.
