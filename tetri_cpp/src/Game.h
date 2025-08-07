@@ -47,11 +47,8 @@ private:
     void InitGame();
 
     /// @brief Draws a given piece.
-    /// @param posX The x-coordinate of the piece.
-    /// @param posY The y-coordinate of the piece.
-    /// @param piece The kind of the piece.
-    /// @param rotation The rotation of the piece.
-    void DrawPiece(int posX, int posY, int piece, int rotation) const;
+    /// @param pieceState The state of a piece.
+    void DrawPiece(const PieceState& pieceState) const;
 
     /// @brief Draws the board's delimiters and existing board blocks.
     void DrawBoard() const;

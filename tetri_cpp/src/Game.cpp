@@ -52,24 +52,21 @@ void Game::CreateNewPiece()
 }
 
 /// @brief Draws a given piece.
-/// @param posX The x-coordinate of the piece.
-/// @param posY The y-coordinate of the piece.
-/// @param piece The kind of the piece.
-/// @param rotation The rotation of the piece.
-void Game::DrawPiece(int posX, int posY, int piece, int rotation) const
+/// @param pieceState The state of a piece.
+void Game::DrawPiece(const PieceState& pieceState) const
 {
     ColorLabel col = ColorLabel::BLUE; // Color of the block
 
     // Obtain the position in pixel in the screen of the block we want to draw
-    int pixelsX = board.GetXPosInPixels(posX);
-    int pixelsY = board.GetYPosInPixels(posY);
+    int pixelsX = board.GetXPosInPixels(pieceState.posX);
+    int pixelsY = board.GetYPosInPixels(pieceState.posY);
 
     // Travel the matrix of blocks of the piece and draw the blocks that are filled
     for (int i = 0; i < PIECE_BLOCKS; i++)
     {
         for (int j = 0; j < PIECE_BLOCKS; j++)
         {
-            int blockType = Pieces::GetBlockType({ j, i, piece, rotation });
+            int blockType = Pieces::GetBlockType({ j, i, pieceState.piece, pieceState.rotation });
 
             // Get the type of the block and draw it with the correct color
             switch (blockType)
@@ -128,6 +125,6 @@ void Game::DrawBoard() const
 void Game::DrawScene()
 {
     DrawBoard(); // Draw the delimitation lines and blocks stored in the board
-    DrawPiece(fallingPiece.posX, fallingPiece.posY, fallingPiece.piece, fallingPiece.rotation); // Draw the playing piece
-    DrawPiece(nextPiece.posX, nextPiece.posY, nextPiece.piece, nextPiece.rotation); // Draw the next piece
+    DrawPiece(fallingPiece); // Draw the playing piece
+    DrawPiece(nextPiece); // Draw the next piece
 }
