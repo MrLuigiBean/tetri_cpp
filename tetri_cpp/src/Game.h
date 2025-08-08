@@ -35,6 +35,9 @@ public:
     /// @brief Contains information of the piece currently falling.
     PieceState fallingPiece;
 
+    /// @brief Contains information of the ghost of the piece currently falling.
+    PieceState ghostFallingPiece;
+
 private:
 
     /// @brief The screen width in pixels.

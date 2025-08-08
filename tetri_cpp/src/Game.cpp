@@ -29,6 +29,8 @@ void Game::InitGame()
     fallingPiece.posX = (BOARD_WIDTH / 2) + Pieces::GetXInitialPosition(fallingPiece.piece, fallingPiece.rotation);
     fallingPiece.posY = Pieces::GetYInitialPosition(fallingPiece.piece, fallingPiece.rotation);
 
+    ghostFallingPiece = fallingPiece;
+
     // Next piece
     nextPiece.piece = GetRand(0, TOTAL_KINDS - 1);
     nextPiece.rotation = GetRand(0, TOTAL_ROTATIONS - 1);
@@ -45,6 +47,8 @@ void Game::CreateNewPiece()
     fallingPiece.rotation = nextPiece.rotation;
     fallingPiece.posX = (BOARD_WIDTH / 2) + Pieces::GetXInitialPosition(fallingPiece.piece, fallingPiece.rotation);
     fallingPiece.posY = Pieces::GetYInitialPosition(fallingPiece.piece, fallingPiece.rotation);
+
+    ghostFallingPiece = fallingPiece;
 
     // Random next piece
     nextPiece.piece = GetRand(0, TOTAL_KINDS - 1);
@@ -151,6 +155,7 @@ void Game::DrawBoard() const
 void Game::DrawScene()
 {
     DrawBoard(); // Draw the delimitation lines and blocks stored in the board
+    DrawPiece(ghostFallingPiece); // Draw the ghost image of the falling piece
     DrawPiece(fallingPiece); // Draw the playing piece
     DrawPiece(nextPiece); // Draw the next piece
 }
