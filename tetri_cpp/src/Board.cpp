@@ -2,7 +2,7 @@
 
 /// @brief Initialises the board with a given height.
 /// @param height The height of the board in pixels.
-Board::Board(int height) : boardHeight{ height } {}
+Board::Board(int height) : boardHeight{ height } { InitBoard(); }
 
 /// @brief Initializes all board blocks to Board::POS_FREE.
 void Board::InitBoard()

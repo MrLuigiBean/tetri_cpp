@@ -13,7 +13,7 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
     static AppState state{};
 
     /* Create the window */
-    if (!SDL_CreateWindowAndRenderer("Hello World", 1920, 1080, SDL_WINDOW_RESIZABLE, &state.window, &state.renderer)) {
+    if (!SDL_CreateWindowAndRenderer("tetri-cpp", 1920, 1080, SDL_WINDOW_RESIZABLE, &state.window, &state.renderer)) {
         SDL_Log("Couldn't create window and renderer: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     }
@@ -25,6 +25,8 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
         int temp;
         SDL_GetRenderOutputSize(state.renderer, &temp, &screenHeight);
     }
+    // come on man, you can't play tetris in a resolution smaller that THAT.
+    SDL_SetWindowMinimumSize(state.window, 400, 200);
 
     static Game game(screenHeight);
     state.game = &game;
