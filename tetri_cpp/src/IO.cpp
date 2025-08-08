@@ -100,7 +100,9 @@ inline static int Cast(IO::Inputs input)
 /// @param posX2 The x-coordinate of the lower-right corner of the rectangle.
 /// @param posY2 The y-coordinate of the lower-right corner of the rectangle.
 /// @param colorLabel The color to fill in the rectangle with.
-void IO::DrawRectangle(int posX1, int posY1, int posX2, int posY2, ColorLabel colorLabel)
+/// @param isFilled Whether the rectangle should be filled. Default value is `true`.
+void IO::DrawRectangle(int posX1, int posY1, int posX2, int posY2,
+    ColorLabel colorLabel, bool isFilled)
 {
     SaveAndLoadDrawColor _;
 
@@ -116,7 +118,10 @@ void IO::DrawRectangle(int posX1, int posY1, int posX2, int posY2, ColorLabel co
 
     Color col = GetColorFromLabel(colorLabel);
     SDL_SetRenderDrawColor(appState->renderer, col.r, col.g, col.b, col.a);
-    SDL_RenderFillRect(appState->renderer, &frect);
+    if (isFilled)
+        SDL_RenderFillRect(appState->renderer, &frect);
+    else
+        SDL_RenderRect(appState->renderer, &frect);
 }
 
 /// @brief Clears the screen to black.

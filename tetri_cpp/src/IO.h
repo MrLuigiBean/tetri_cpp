@@ -44,7 +44,9 @@ namespace IO
     /// @param posX2 The x-coordinate of the lower-right corner of the rectangle.
     /// @param posY2 The y-coordinate of the lower-right corner of the rectangle.
     /// @param colorLabel The color to fill in the rectangle with.
-    void DrawRectangle(int posX1, int posY1, int posX2, int posY2, ColorLabel colorLabel);
+    /// @param isFilled Whether the rectangle should be filled. Default value is `true`.
+    void DrawRectangle(int posX1, int posY1, int posX2, int posY2,
+        ColorLabel colorLabel, bool isFilled = true);
 
     /// @brief Clears the screen to black.
     void ClearScreen();
