@@ -6,11 +6,7 @@
 /// @brief Constructs the board of the game using a given size.
 /// @param width The width of the screen in pixels.
 /// @param height The height of the screen in pixels.
-Game::Game(int width, int height) :
-    screenWidth{ width }, screenHeight{ height }, board{ Board(height) }
-{
-    InitGame();
-}
+Game::Game(int width, int height) : screenWidth{ width }, screenHeight{ height } { InitGame(); }
 
 /// @brief Returns a random number between two integers.
 /// @param a The lower end of the range.
@@ -72,8 +68,8 @@ void Game::DrawPiece(const PieceState& pieceState) const
     ColorLabel col = ColorLabel::BLUE; // Color of the block
 
     // Obtain the position in pixel in the screen of the block we want to draw
-    int pixelsX = board.GetXPosInPixels(pieceState.posX);
-    int pixelsY = board.GetYPosInPixels(pieceState.posY);
+    int pixelsX = GetXPosInPixels(pieceState.posX);
+    int pixelsY = GetYPosInPixels(pieceState.posY);
 
     // Travel the matrix of blocks of the piece and draw the blocks that are filled
     for (int i = 0; i < PIECE_BLOCKS; i++)
@@ -97,6 +93,22 @@ void Game::DrawPiece(const PieceState& pieceState) const
                     col);
         }
     }
+}
+
+/// @brief Returns the given horizontal coordinate in pixels.
+/// @param posX The x-coordinate of the block.
+/// @return Returns the horizontal position in pixels.
+int Game::GetXPosInPixels(int posX) const
+{
+    return ((screenWidth / 2 - (BLOCK_SIZE * (BOARD_WIDTH / 2))) + (posX * BLOCK_SIZE));
+}
+
+/// @brief Returns the given vertical coordinate in pixels.
+/// @param posY The y-coordinate of the block.
+/// @return Returns the vertical position in pixels.
+int Game::GetYPosInPixels(int posY) const
+{
+    return ((screenHeight - (BLOCK_SIZE * BOARD_HEIGHT)) + (posY * BLOCK_SIZE));
 }
 
 /// @brief Draws the board's delimiters and existing board blocks.

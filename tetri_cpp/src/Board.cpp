@@ -1,8 +1,7 @@
 #include "Board.h"
 
-/// @brief Initialises the board with a given height.
-/// @param height The height of the board in pixels.
-Board::Board(int height) : boardHeight{ height } { InitBoard(); }
+/// @brief Initializes the board.
+Board::Board() { InitBoard(); }
 
 /// @brief Initializes all board blocks to Board::POS_FREE.
 void Board::InitBoard()
@@ -83,22 +82,6 @@ void Board::DeletePossibleLines()
 bool Board::IsFreeBlock(int posX, int posY) const
 {
     return board[posX][posY] == POS_FREE;
-}
-
-/// @brief Returns the given horizontal coordinate in pixels.
-/// @param posX The x-coordinate of the block.
-/// @return Returns the horizontal position in pixels.
-int Board::GetXPosInPixels(int posX) const
-{
-    return ((BOARD_POSITION - (BLOCK_SIZE * (BOARD_WIDTH / 2))) + (posX * BLOCK_SIZE));
-}
-
-/// @brief Returns the given vertical coordinate in pixels.
-/// @param posY The y-coordinate of the block.
-/// @return Returns the vertical position in pixels.
-int Board::GetYPosInPixels(int posY) const
-{
-    return ((boardHeight - (BLOCK_SIZE * BOARD_HEIGHT)) + (posY * BLOCK_SIZE));
 }
 
 /// @brief Check if a given piece can be stored at this position on the board.

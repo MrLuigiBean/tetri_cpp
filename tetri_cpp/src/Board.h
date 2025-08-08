@@ -10,9 +10,6 @@ constexpr int BOARD_LINE_WIDTH = 8;
 /// @brief Width and Height of each block of a piece
 constexpr int BLOCK_SIZE = 32;
 
-/// @brief Center position of the board from the left of the screen
-constexpr int BOARD_POSITION = 1920 / 2;
-
 /// @brief Board width in blocks
 constexpr int BOARD_WIDTH = 10;
 
@@ -33,19 +30,8 @@ class Board
 {
 public:
 
-    /// @brief Initialises the board with a given height.
-    /// @param height The height of the board in pixels.
-    Board(int height);
-
-    /// @brief Returns the given horizontal coordinate in pixels.
-    /// @param posX The x-coordinate of the block.
-    /// @return Returns the horizontal position in pixels.
-    int GetXPosInPixels(int posX) const;
-
-    /// @brief Returns the given vertical coordinate in pixels.
-    /// @param posY The y-coordinate of the block.
-    /// @return Returns the vertical position in pixels.
-    int GetYPosInPixels(int posY) const;
+    /// @brief Initializes the board.
+    Board();
 
     /// @brief Checks if the given board position is occupied.
     /// @param posX The x-coordinate to check.
@@ -82,9 +68,6 @@ private:
 
     /// @brief Represents the board containing the blocks from fallen pieces.
     char board[BOARD_WIDTH][BOARD_HEIGHT] = { POS_FREE };
-
-    /// @brief The height of the board in pixels.
-    int boardHeight = 0;
 
     /// @brief Initializes all board blocks to Board::POS_FREE.
     void InitBoard();

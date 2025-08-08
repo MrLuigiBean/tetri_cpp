@@ -59,6 +59,16 @@ private:
     /// @param pieceState The state of a piece.
     void DrawPiece(const PieceState& pieceState) const;
 
+    /// @brief Returns the given horizontal coordinate in pixels.
+    /// @param posX The x-coordinate of the block.
+    /// @return Returns the horizontal position in pixels.
+    int GetXPosInPixels(int posX) const;
+
+    /// @brief Returns the given vertical coordinate in pixels.
+    /// @param posY The y-coordinate of the block.
+    /// @return Returns the vertical position in pixels.
+    int GetYPosInPixels(int posY) const;
+
     /// @brief Draws the board's delimiters and existing board blocks.
     void DrawBoard() const;
 };
