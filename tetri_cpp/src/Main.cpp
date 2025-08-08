@@ -25,8 +25,7 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
         int temp;
         SDL_GetRenderOutputSize(state.renderer, &temp, &screenHeight);
     }
-    // come on man, you can't play tetris in a resolution smaller that THAT.
-    SDL_SetWindowMinimumSize(state.window, 400, 200);
+    SDL_SetWindowMinimumSize(state.window, BOARD_WIDTH * BLOCK_SIZE, BOARD_HEIGHT * BLOCK_SIZE);
 
     static Game game(screenHeight);
     state.game = &game;
