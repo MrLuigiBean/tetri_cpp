@@ -13,7 +13,7 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
     static AppState state{};
 
     /* Create the window */
-    if (!SDL_CreateWindowAndRenderer("tetri-cpp", 1920, 1080, SDL_WINDOW_RESIZABLE, &state.window, &state.renderer)) {
+    if (!SDL_CreateWindowAndRenderer("tetri-cpp", 1600, 900, SDL_WINDOW_RESIZABLE, &state.window, &state.renderer)) {
         SDL_Log("Couldn't create window and renderer: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     }
