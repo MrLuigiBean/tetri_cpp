@@ -103,8 +103,8 @@ void Game::DrawPiece(const PieceState& pieceState) const
 void Game::DrawBoard() const
 {
     // Calculate the limits of the board in pixels
-    int posX1 = BOARD_POSITION - (BLOCK_SIZE * (BOARD_WIDTH / 2)) - 1;
-    int posX2 = BOARD_POSITION + (BLOCK_SIZE * (BOARD_WIDTH / 2));
+    int posX1 = screenWidth / 2 - (BLOCK_SIZE * (BOARD_WIDTH / 2)) - 1;
+    int posX2 = screenWidth / 2 + (BLOCK_SIZE * (BOARD_WIDTH / 2));
     int posY = screenHeight - (BLOCK_SIZE * BOARD_HEIGHT);
 
     // Check that the vertical margin is not to small
