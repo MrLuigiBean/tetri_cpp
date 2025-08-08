@@ -20,14 +20,12 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
 
     SDL_MaximizeWindow(state.window);
 
-    int screenHeight;
-    {
-        int temp;
-        SDL_GetRenderOutputSize(state.renderer, &temp, &screenHeight);
-    }
     SDL_SetWindowMinimumSize(state.window, BOARD_WIDTH * BLOCK_SIZE, BOARD_HEIGHT * BLOCK_SIZE);
 
-    static Game game(screenHeight);
+    int screenWidth, screenHeight;
+    SDL_GetRenderOutputSize(state.renderer, &screenWidth, &screenHeight);
+
+    static Game game(screenWidth, screenHeight);
     state.game = &game;
 
     // store the window, renderer and game in appstate to be passed around in other SDL_App??? functions
@@ -48,6 +46,10 @@ SDL_AppResult SDL_AppEvent(void* appstate, SDL_Event* event)
 
     if (event->type == SDL_EVENT_KEY_DOWN && event->key.key == SDLK_ESCAPE)
         return SDL_APP_SUCCESS;
+
+    if (event->type == SDL_EVENT_WINDOW_RESIZED)
+        static_cast<AppState*>(appstate)->game->UpdateGameSize(
+            event->window.data1, event->window.data2);
 
     if (event->type == SDL_EVENT_KEY_DOWN || event->type == SDL_EVENT_KEY_UP)
         IO::PollKey(event->key);

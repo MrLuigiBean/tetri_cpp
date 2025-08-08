@@ -13,8 +13,9 @@ class Game
 public:
 
     /// @brief Constructs the board of the game using a given size.
+    /// @param width The width of the screen in pixels.
     /// @param height The height of the screen in pixels.
-    Game(int height);
+    Game(int width, int height);
 
     /// @brief Draws the board, the current piece and the next piece.
     void DrawScene();
@@ -23,6 +24,11 @@ public:
     /// after which a new "next piece" is selected.
     void CreateNewPiece();
 
+    /// @brief Updates the game's width and height
+    /// @param newWidth The new screen width in pixels.
+    /// @param newHeight The new screen height in pixels.
+    void UpdateGameSize(int newWidth, int newHeight);
+
     /// @brief The board that holds fallen blocks.
     Board board;
 
@@ -30,6 +36,9 @@ public:
     PieceState fallingPiece;
 
 private:
+
+    /// @brief The screen width in pixels.
+    int screenWidth = 0;
 
     /// @brief The screen height in pixels.
     int screenHeight = 0;

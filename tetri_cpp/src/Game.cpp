@@ -4,8 +4,13 @@
 #include <ctime>
 
 /// @brief Constructs the board of the game using a given size.
+/// @param width The width of the screen in pixels.
 /// @param height The height of the screen in pixels.
-Game::Game(int height) : screenHeight{ height }, board{ Board(height) } { InitGame(); }
+Game::Game(int width, int height) :
+    screenWidth{ width }, screenHeight{ height }, board{ Board(height) }
+{
+    InitGame();
+}
 
 /// @brief Returns a random number between two integers.
 /// @param a The lower end of the range.
@@ -48,6 +53,16 @@ void Game::CreateNewPiece()
     // Random next piece
     nextPiece.piece = GetRand(0, TOTAL_KINDS - 1);
     nextPiece.rotation = GetRand(0, TOTAL_ROTATIONS - 1);
+}
+
+/// @brief Updates the game's width and height
+/// @param newWidth The new screen width in pixels.
+/// @param newHeight The new screen height in pixels.
+void Game::UpdateGameSize(int newWidth, int newHeight)
+{
+    screenWidth = newWidth;
+    screenHeight = newHeight;
+    // TODO: tell this->board that height has been updated??
 }
 
 /// @brief Draws a given piece.
