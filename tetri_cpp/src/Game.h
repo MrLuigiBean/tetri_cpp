@@ -55,9 +55,6 @@ private:
     /// @return A random number in the range [a, b]
     int GetRand(int a, int b);
 
-    /// @brief Selects the first and next piece randomly.
-    void InitGame();
-
     /// @brief Draws a given piece.
     /// @param pieceState The state of a piece.
     /// @param isGhost Whether the piece being drawn is a transparent ghost piece.

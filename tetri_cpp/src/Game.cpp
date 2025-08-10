@@ -3,22 +3,11 @@
 #include <cstdlib>
 #include <ctime>
 
-/// @brief Constructs the board of the game using a given size.
+/// @brief Constructs the board of the game using a given size and selects the first and
+/// next piece randomly.
 /// @param width The width of the screen in pixels.
 /// @param height The height of the screen in pixels.
-Game::Game(int width, int height) : screenWidth{ width }, screenHeight{ height } { InitGame(); }
-
-/// @brief Returns a random number between two integers.
-/// @param a The lower end of the range.
-/// @param b The upper end of the range.
-/// @return A random number in the range [a, b]
-int Game::GetRand(int a, int b)
-{
-    return rand() % (b - a + 1) + a;
-}
-
-/// @brief Selects the first and next piece randomly.
-void Game::InitGame()
+Game::Game(int width, int height) : screenWidth{ width }, screenHeight{ height }
 {
     // Init random numbers
     srand(static_cast<unsigned int>(time(NULL)));
@@ -37,6 +26,15 @@ void Game::InitGame()
     nextPiece.rotation = GetRand(0, TOTAL_ROTATIONS - 1);
     nextPiece.posX = BOARD_WIDTH + 5;
     nextPiece.posY = 5;
+}
+
+/// @brief Returns a random number between two integers.
+/// @param a The lower end of the range.
+/// @param b The upper end of the range.
+/// @return A random number in the range [a, b]
+int Game::GetRand(int a, int b)
+{
+    return rand() % (b - a + 1) + a;
 }
 
 /// @brief Sets the next piece as the current one and resets its position,

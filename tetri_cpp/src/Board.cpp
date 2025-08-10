@@ -1,10 +1,7 @@
 #include "Board.h"
 
-/// @brief Initializes the board.
-Board::Board() { InitBoard(); }
-
 /// @brief Initializes all board blocks to Board::POS_FREE.
-void Board::InitBoard()
+Board::Board()
 {
     for (int i = 0; i < BOARD_WIDTH; i++)
         for (int j = 0; j < BOARD_HEIGHT; j++)
