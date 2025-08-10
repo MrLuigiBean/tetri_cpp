@@ -143,7 +143,6 @@ SDL_AppResult SDL_AppIterate(void* appstate)
         timeSinceLastMovement = SDL_GetTicks();
     }
 
-
 #pragma endregion
 
 #pragma region Render
