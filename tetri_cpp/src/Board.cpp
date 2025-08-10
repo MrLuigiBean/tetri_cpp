@@ -43,6 +43,18 @@ bool Board::IsGameOver() const
     return false;
 }
 
+/// @brief Moves a piece to its bottom-most valid position.
+/// @param pieceState The piece to drop.
+void Board::DropPiece(PieceState& pieceState) const
+{
+    // keep going down until you hit something
+    while (IsPossibleMovement(pieceState))
+        pieceState.posY++;
+
+    // go back up one space because that where the piece would actually be
+    pieceState.posY--;
+}
+
 /// @brief Deletes a line of the board by moving all lines above down.
 /// @param posY Vertical position of blocks in the line to delete.
 void Board::DeleteLine(int posY)

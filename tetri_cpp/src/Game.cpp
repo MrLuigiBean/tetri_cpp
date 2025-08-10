@@ -30,6 +30,7 @@ void Game::InitGame()
     fallingPiece.posY = Pieces::GetYInitialPosition(fallingPiece.piece, fallingPiece.rotation);
 
     ghostFallingPiece = fallingPiece;
+    board.DropPiece(ghostFallingPiece);
 
     // Next piece
     nextPiece.piece = GetRand(0, TOTAL_KINDS - 1);
@@ -49,6 +50,7 @@ void Game::CreateNewPiece()
     fallingPiece.posY = Pieces::GetYInitialPosition(fallingPiece.piece, fallingPiece.rotation);
 
     ghostFallingPiece = fallingPiece;
+    board.DropPiece(ghostFallingPiece);
 
     // Random next piece
     nextPiece.piece = GetRand(0, TOTAL_KINDS - 1);

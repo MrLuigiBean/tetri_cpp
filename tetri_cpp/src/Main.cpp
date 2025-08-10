@@ -69,12 +69,18 @@ SDL_AppResult SDL_AppIterate(void* appstate)
     {
         if (game->board.IsPossibleMovement(game->fallingPiece.If({ .modPosX = -1 })))
             game->fallingPiece.posX--;
+
+        game->ghostFallingPiece = game->fallingPiece;
+        game->board.DropPiece(game->ghostFallingPiece);
     }
 
     if (IO::IsKeyDown(IO::Inputs::RIGHT))
     {
         if (game->board.IsPossibleMovement(game->fallingPiece.If({ .modPosX = +1 })))
             game->fallingPiece.posX++;
+
+        game->ghostFallingPiece = game->fallingPiece;
+        game->board.DropPiece(game->ghostFallingPiece);
     }
 
     if (IO::IsKeyDown(IO::Inputs::DOWN))
@@ -87,14 +93,16 @@ SDL_AppResult SDL_AppIterate(void* appstate)
     {
         if (game->board.IsPossibleMovement(game->fallingPiece.If({ .modRotation = +1 })))
             game->fallingPiece.rotation = (game->fallingPiece.rotation + 1) % 4;
+
+        game->ghostFallingPiece = game->fallingPiece;
+        game->board.DropPiece(game->ghostFallingPiece);
     }
 
     if (IO::IsKeyDown(IO::Inputs::DROP))
     {
-        while (game->board.IsPossibleMovement(game->fallingPiece))
-            game->fallingPiece.posY++;
+        game->board.DropPiece(game->fallingPiece);
 
-        game->board.StorePiece(game->fallingPiece.If({ .modPosY = -1 }));
+        game->board.StorePiece(game->fallingPiece);
 
         game->board.DeletePossibleLines();
 

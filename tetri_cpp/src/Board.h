@@ -55,6 +55,10 @@ public:
     /// @return Returns `true` is there a blocks at the top, `false` otherwise.
     bool IsGameOver() const;
 
+    /// @brief Moves a piece to its bottom-most valid position.
+    /// @param pieceState The piece to drop.
+    void DropPiece(PieceState& pieceState) const;
+
 private:
 
     enum
