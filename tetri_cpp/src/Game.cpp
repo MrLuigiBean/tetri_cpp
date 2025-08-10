@@ -67,10 +67,9 @@ void Game::UpdateGameSize(int newWidth, int newHeight)
 
 /// @brief Draws a given piece.
 /// @param pieceState The state of a piece.
-void Game::DrawPiece(const PieceState& pieceState) const
+/// @param isGhost Whether the piece being drawn is a transparent ghost piece.
+void Game::DrawPiece(const PieceState& pieceState, bool isGhost) const
 {
-    ColorLabel col = ColorLabel::BLUE; // Color of the block
-
     // Obtain the position in pixel in the screen of the block we want to draw
     int pixelsX = GetXPosInPixels(pieceState.posX);
     int pixelsY = GetYPosInPixels(pieceState.posY);
@@ -82,19 +81,23 @@ void Game::DrawPiece(const PieceState& pieceState) const
         {
             int blockType = Pieces::GetBlockType({ j, i, pieceState.piece, pieceState.rotation });
 
-            // Get the type of the block and draw it with the correct color
-            switch (blockType)
-            {
-            case 1: col = GREEN; break; // For each block of the piece except the pivot
-            case 2: col = BLUE; break; // For the pivot
-            }
+            if (blockType == 0)
+                continue;
 
-            if (blockType != 0)
-                IO::DrawRectangle(pixelsX + i * BLOCK_SIZE,
-                    pixelsY + j * BLOCK_SIZE,
-                    (pixelsX + i * BLOCK_SIZE) + BLOCK_SIZE - 1,
-                    (pixelsY + j * BLOCK_SIZE) + BLOCK_SIZE - 1,
-                    col);
+            // Get the type of the block and draw it with the correct color
+            //switch (blockType)
+            //{
+            //case 1: col = GREEN; break; // For each block of the piece except the pivot
+            //case 2: col = BLUE; break; // For the pivot
+            //}
+
+            ColorLabel col = isGhost ? RED : (blockType == 1 ? GREEN : BLUE);
+
+            IO::DrawRectangle(pixelsX + i * BLOCK_SIZE,
+                pixelsY + j * BLOCK_SIZE,
+                (pixelsX + i * BLOCK_SIZE) + BLOCK_SIZE - 1,
+                (pixelsY + j * BLOCK_SIZE) + BLOCK_SIZE - 1,
+                col, !isGhost);
         }
     }
 }
@@ -155,7 +158,7 @@ void Game::DrawBoard() const
 void Game::DrawScene()
 {
     DrawBoard(); // Draw the delimitation lines and blocks stored in the board
-    DrawPiece(ghostFallingPiece); // Draw the ghost image of the falling piece
+    DrawPiece(ghostFallingPiece, true); // Draw the transparent ghost piece
     DrawPiece(fallingPiece); // Draw the playing piece
     DrawPiece(nextPiece); // Draw the next piece
 }

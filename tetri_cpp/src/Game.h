@@ -60,7 +60,8 @@ private:
 
     /// @brief Draws a given piece.
     /// @param pieceState The state of a piece.
-    void DrawPiece(const PieceState& pieceState) const;
+    /// @param isGhost Whether the piece being drawn is a transparent ghost piece.
+    void DrawPiece(const PieceState& pieceState, bool isGhost = false) const;
 
     /// @brief Returns the given horizontal coordinate in pixels.
     /// @param posX The x-coordinate of the block.
