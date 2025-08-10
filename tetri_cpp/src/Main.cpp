@@ -148,18 +148,7 @@ SDL_AppResult SDL_AppIterate(void* appstate)
 
 #pragma region Render
 
-    const char* message = "Hello World!";
-    int w = 0, h = 0;
-
-    /* Center the message and scale it up */
-    SDL_GetRenderOutputSize(state->renderer, &w, &h);
-    float x = (w - SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE * SDL_strlen(message)) / 2.0f;
-    float y = (h - SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE) / 2.0f;
-
-    /* Draw the message */
     IO::ClearScreen();
-    SDL_SetRenderDrawColor(state->renderer, 255, 255, 255, 255);
-    SDL_RenderDebugText(state->renderer, x, y, message);
     game->DrawScene();
     IO::UpdateScreen();
 
