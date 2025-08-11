@@ -18,7 +18,7 @@ public:
     Game(int width, int height);
 
     /// @brief Draws the board, the current piece and the next piece.
-    void DrawScene();
+    void DrawScene() const;
 
     /// @brief Sets the next piece as the current one and resets its position,
     /// after which a new "next piece" is selected.

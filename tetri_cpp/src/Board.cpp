@@ -30,7 +30,7 @@ void Board::StorePiece(const PieceState& pieceState)
 /// @return Returns `true` is there a blocks at the top, `false` otherwise.
 bool Board::IsGameOver() const
 {
-    //If the first line has blocks, then, game over
+    // If the first line has blocks, then game over
     for (int i = 0; i < BOARD_WIDTH; i++)
     {
         if (board[i][0] == POS_FILLED)

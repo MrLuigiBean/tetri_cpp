@@ -7,7 +7,7 @@
 /// @brief Width of each of the two lines that delimit the board
 constexpr int BOARD_LINE_WIDTH = 8;
 
-/// @brief Width and Height of each block of a piece
+/// @brief Width and Height of each block of a piece in pixels
 constexpr int BLOCK_SIZE = 32;
 
 /// @brief Board width in blocks
@@ -16,14 +16,11 @@ constexpr int BOARD_WIDTH = 10;
 /// @brief Board height in blocks
 constexpr int BOARD_HEIGHT = 20;
 
-/// @brief Minimum vertical margin for the board limit
-constexpr int MIN_VERTICAL_MARGIN = 20;
-
-/// @brief Minimum horizontal margin for the board limit
-constexpr int MIN_HORIZONTAL_MARGIN = 20;
-
 /// @brief Number of horizontal and vertical blocks of a matrix piece
 constexpr int PIECE_BLOCKS = 5;
+
+/// @brief Spacing between adjacent blocks
+constexpr int BLOCK_GAP = 1;
 
 /// @brief This class manages the placement of pieces in the game board.
 class Board

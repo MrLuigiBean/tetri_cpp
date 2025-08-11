@@ -62,7 +62,6 @@ void Game::UpdateGameSize(int newWidth, int newHeight)
 {
     screenWidth = newWidth;
     screenHeight = newHeight;
-    // TODO: tell this->board that height has been updated??
 }
 
 /// @brief Draws a given piece.
@@ -126,19 +125,13 @@ void Game::DrawBoard() const
     int posX2 = screenWidth / 2 + (BLOCK_SIZE * (BOARD_WIDTH / 2));
     int posY = screenHeight - (BLOCK_SIZE * BOARD_HEIGHT);
 
-    // Check that the vertical margin is not to small
-    //assert (posY > MIN_VERTICAL_MARGIN);
-
     // Rectangles that delimits the board
     IO::DrawRectangle(posX1 - BOARD_LINE_WIDTH, posY, posX1, screenHeight - 1, BLUE);
 
     IO::DrawRectangle(posX2, posY, posX2 + BOARD_LINE_WIDTH, screenHeight - 1, BLUE);
 
-    // Check that the horizontal margin is not to small
-    //assert (posX1 > MIN_HORIZONTAL_MARGIN);
-
     // Drawing the blocks that are already stored in the board
-    posX1 += 1;
+    ++posX1;
     for (int i = 0; i < BOARD_WIDTH; i++)
     {
         for (int j = 0; j < BOARD_HEIGHT; j++)
@@ -147,15 +140,15 @@ void Game::DrawBoard() const
             if (!board.IsFreeBlock(i, j))
                 IO::DrawRectangle(posX1 + i * BLOCK_SIZE,
                     posY + j * BLOCK_SIZE,
-                    (posX1 + i * BLOCK_SIZE) + BLOCK_SIZE - 1,
-                    (posY + j * BLOCK_SIZE) + BLOCK_SIZE - 1,
+                    (posX1 + i * BLOCK_SIZE) + BLOCK_SIZE - BLOCK_GAP,
+                    (posY + j * BLOCK_SIZE) + BLOCK_SIZE - BLOCK_GAP,
                     RED);
         }
     }
 }
 
 /// @brief Draws the board, the current piece and the next piece.
-void Game::DrawScene()
+void Game::DrawScene() const
 {
     DrawBoard(); // Draw the delimitation lines and blocks stored in the board
     DrawPiece(ghostFallingPiece, true); // Draw the transparent ghost piece
