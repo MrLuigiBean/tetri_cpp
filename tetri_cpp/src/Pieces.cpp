@@ -7,7 +7,7 @@
 int Pieces::GetBlockType(const PieceState& pieceState)
 {
     return allPieceRotations[pieceState.piece][pieceState.rotation]
-        [pieceState.posX][pieceState.posY];
+        [pieceState.posY][pieceState.posX];
 }
 
 /// @brief Returns the horizontal displacement of the piece that has to be applied in

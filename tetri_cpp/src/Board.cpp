@@ -3,8 +3,8 @@
 /// @brief Initializes all board blocks to Board::POS_FREE.
 Board::Board()
 {
-    for (int col = 0; col < BOARD_WIDTH; col++)
-        for (int row = 0; row < BOARD_HEIGHT; row++)
+    for (int row = 0; row < BOARD_HEIGHT; row++)
+        for (int col = 0; col < BOARD_WIDTH; col++)
             board[row][col] = POS_FREE;
 }
 
@@ -13,14 +13,14 @@ Board::Board()
 void Board::StorePiece(const PieceState& pieceState)
 {
     // Store each block of the piece into the board
-    for (int col = pieceState.posX, matrixCol = 0;
-        col < pieceState.posX + PIECE_BLOCKS; col++, matrixCol++)
+    for (int row = pieceState.posY, matrixRow = 0;
+        row < pieceState.posY + PIECE_BLOCKS; row++, matrixRow++)
     {
-        for (int row = pieceState.posY, matrixRow = 0;
-            row < pieceState.posY + PIECE_BLOCKS; row++, matrixRow++)
+        for (int col = pieceState.posX, matrixCol = 0;
+            col < pieceState.posX + PIECE_BLOCKS; col++, matrixCol++)
         {
             // Store only the blocks of the piece that are not holes
-            if (Pieces::GetBlockType({ matrixRow, matrixCol, pieceState.piece, pieceState.rotation }) != 0)
+            if (Pieces::GetBlockType({ matrixCol, matrixRow, pieceState.piece, pieceState.rotation }) != 0)
                 board[row][col] = POS_FILLED;
         }
     }
@@ -59,12 +59,8 @@ void Board::DeleteLine(int posY)
     // Moves all the upper lines one row down
     // TODO: does this actually clear the bottom-most line? hmm...
     for (int row = posY; row > 0; row--)
-    {
         for (int col = 0; col < BOARD_WIDTH; col++)
-        {
             board[row][col] = board[row - 1][col];
-        }
-    }
 }
 
 /// @brief Determines which lines to clear and removes them from the board.
@@ -101,13 +97,13 @@ bool Board::IsPossibleMovement(const PieceState& pieceState) const
 {
     // Checks collision with pieces already stored in the board or the board limits
     // This is just to check the 5x5 blocks of a piece with the appropriate area in the board
-    for (int col = pieceState.posX, matrixCol = 0;
-        col < pieceState.posX + PIECE_BLOCKS; col++, matrixCol++)
+    for (int row = pieceState.posY, matrixRow = 0;
+        row < pieceState.posY + PIECE_BLOCKS; row++, matrixRow++)
     {
-        for (int row = pieceState.posY, matrixRow = 0;
-            row < pieceState.posY + PIECE_BLOCKS; row++, matrixRow++)
+        for (int col = pieceState.posX, matrixCol = 0;
+            col < pieceState.posX + PIECE_BLOCKS; col++, matrixCol++)
         {
-            int blockType = Pieces::GetBlockType({ matrixRow, matrixCol, pieceState.piece, pieceState.rotation });
+            int blockType = Pieces::GetBlockType({ matrixCol, matrixRow, pieceState.piece, pieceState.rotation });
 
             // Check if the piece is outside the limits of the board
             if (col < 0 ||

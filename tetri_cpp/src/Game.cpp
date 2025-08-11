@@ -74,11 +74,11 @@ void Game::DrawPiece(const PieceState& pieceState, bool isGhost) const
     int pixelsY = GetYPosInPixels(pieceState.posY);
 
     // Travel the matrix of blocks of the piece and draw the blocks that are filled
-    for (int matrixCol = 0; matrixCol < PIECE_BLOCKS; matrixCol++)
+    for (int matrixRow = 0; matrixRow < PIECE_BLOCKS; matrixRow++)
     {
-        for (int matrixRow = 0; matrixRow < PIECE_BLOCKS; matrixRow++)
+        for (int matrixCol = 0; matrixCol < PIECE_BLOCKS; matrixCol++)
         {
-            int blockType = Pieces::GetBlockType({ matrixRow, matrixCol, pieceState.piece, pieceState.rotation });
+            int blockType = Pieces::GetBlockType({ matrixCol, matrixRow, pieceState.piece, pieceState.rotation });
 
             if (blockType == 0)
                 continue;
@@ -132,9 +132,9 @@ void Game::DrawBoard() const
 
     // Drawing the blocks that are already stored in the board
     ++boardLimitLeft;
-    for (int col = 0; col < BOARD_WIDTH; col++)
+    for (int row = 0; row < BOARD_HEIGHT; row++)
     {
-        for (int row = 0; row < BOARD_HEIGHT; row++)
+        for (int col = 0; col < BOARD_WIDTH; col++)
         {
             // Check if the block is filled, if so, draw it
             if (!board.IsFreeBlock(col, row))
