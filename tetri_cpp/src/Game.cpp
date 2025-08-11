@@ -74,11 +74,11 @@ void Game::DrawPiece(const PieceState& pieceState, bool isGhost) const
     int pixelsY = GetYPosInPixels(pieceState.posY);
 
     // Travel the matrix of blocks of the piece and draw the blocks that are filled
-    for (int i = 0; i < PIECE_BLOCKS; i++)
+    for (int matrixCol = 0; matrixCol < PIECE_BLOCKS; matrixCol++)
     {
-        for (int j = 0; j < PIECE_BLOCKS; j++)
+        for (int matrixRow = 0; matrixRow < PIECE_BLOCKS; matrixRow++)
         {
-            int blockType = Pieces::GetBlockType({ j, i, pieceState.piece, pieceState.rotation });
+            int blockType = Pieces::GetBlockType({ matrixRow, matrixCol, pieceState.piece, pieceState.rotation });
 
             if (blockType == 0)
                 continue;
@@ -92,10 +92,10 @@ void Game::DrawPiece(const PieceState& pieceState, bool isGhost) const
 
             ColorLabel col = isGhost ? RED : (blockType == 1 ? GREEN : BLUE);
 
-            IO::DrawRectangle(pixelsX + i * BLOCK_SIZE,
-                pixelsY + j * BLOCK_SIZE,
-                (pixelsX + i * BLOCK_SIZE) + BLOCK_SIZE - 1,
-                (pixelsY + j * BLOCK_SIZE) + BLOCK_SIZE - 1,
+            IO::DrawRectangle(pixelsX + matrixCol * BLOCK_SIZE,
+                pixelsY + matrixRow * BLOCK_SIZE,
+                (pixelsX + matrixCol * BLOCK_SIZE) + BLOCK_SIZE - BLOCK_GAP,
+                (pixelsY + matrixRow * BLOCK_SIZE) + BLOCK_SIZE - BLOCK_GAP,
                 col, !isGhost);
         }
     }
@@ -121,27 +121,27 @@ int Game::GetYPosInPixels(int posY) const
 void Game::DrawBoard() const
 {
     // Calculate the limits of the board in pixels
-    int posX1 = screenWidth / 2 - (BLOCK_SIZE * (BOARD_WIDTH / 2)) - 1;
-    int posX2 = screenWidth / 2 + (BLOCK_SIZE * (BOARD_WIDTH / 2));
-    int posY = screenHeight - (BLOCK_SIZE * BOARD_HEIGHT);
+    int boardLimitLeft = screenWidth / 2 - (BLOCK_SIZE * (BOARD_WIDTH / 2)) - 1;
+    int boardLimitRight = screenWidth / 2 + (BLOCK_SIZE * (BOARD_WIDTH / 2));
+    int boardLimitTop = screenHeight - (BLOCK_SIZE * BOARD_HEIGHT);
 
     // Rectangles that delimits the board
-    IO::DrawRectangle(posX1 - BOARD_LINE_WIDTH, posY, posX1, screenHeight - 1, BLUE);
+    IO::DrawRectangle(boardLimitLeft - BOARD_LINE_WIDTH, boardLimitTop, boardLimitLeft, screenHeight - 1, BLUE);
 
-    IO::DrawRectangle(posX2, posY, posX2 + BOARD_LINE_WIDTH, screenHeight - 1, BLUE);
+    IO::DrawRectangle(boardLimitRight, boardLimitTop, boardLimitRight + BOARD_LINE_WIDTH, screenHeight - 1, BLUE);
 
     // Drawing the blocks that are already stored in the board
-    ++posX1;
-    for (int i = 0; i < BOARD_WIDTH; i++)
+    ++boardLimitLeft;
+    for (int col = 0; col < BOARD_WIDTH; col++)
     {
-        for (int j = 0; j < BOARD_HEIGHT; j++)
+        for (int row = 0; row < BOARD_HEIGHT; row++)
         {
             // Check if the block is filled, if so, draw it
-            if (!board.IsFreeBlock(i, j))
-                IO::DrawRectangle(posX1 + i * BLOCK_SIZE,
-                    posY + j * BLOCK_SIZE,
-                    (posX1 + i * BLOCK_SIZE) + BLOCK_SIZE - BLOCK_GAP,
-                    (posY + j * BLOCK_SIZE) + BLOCK_SIZE - BLOCK_GAP,
+            if (!board.IsFreeBlock(col, row))
+                IO::DrawRectangle(boardLimitLeft + col * BLOCK_SIZE,
+                    boardLimitTop + row * BLOCK_SIZE,
+                    (boardLimitLeft + col * BLOCK_SIZE) + BLOCK_SIZE - BLOCK_GAP,
+                    (boardLimitTop + row * BLOCK_SIZE) + BLOCK_SIZE - BLOCK_GAP,
                     RED);
         }
     }

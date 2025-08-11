@@ -3,9 +3,9 @@
 /// @brief Initializes all board blocks to Board::POS_FREE.
 Board::Board()
 {
-    for (int i = 0; i < BOARD_WIDTH; i++)
-        for (int j = 0; j < BOARD_HEIGHT; j++)
-            board[i][j] = POS_FREE;
+    for (int col = 0; col < BOARD_WIDTH; col++)
+        for (int row = 0; row < BOARD_HEIGHT; row++)
+            board[col][row] = POS_FREE;
 }
 
 /// @brief Store a piece in the board by filling in its blocks.
@@ -13,15 +13,15 @@ Board::Board()
 void Board::StorePiece(const PieceState& pieceState)
 {
     // Store each block of the piece into the board
-    for (int i1 = pieceState.posX, i2 = 0;
-        i1 < pieceState.posX + PIECE_BLOCKS; i1++, i2++)
+    for (int col = pieceState.posX, matrixCol = 0;
+        col < pieceState.posX + PIECE_BLOCKS; col++, matrixCol++)
     {
-        for (int j1 = pieceState.posY, j2 = 0;
-            j1 < pieceState.posY + PIECE_BLOCKS; j1++, j2++)
+        for (int row = pieceState.posY, matrixRow = 0;
+            row < pieceState.posY + PIECE_BLOCKS; row++, matrixRow++)
         {
             // Store only the blocks of the piece that are not holes
-            if (Pieces::GetBlockType({ j2, i2, pieceState.piece, pieceState.rotation }) != 0)
-                board[i1][j1] = POS_FILLED;
+            if (Pieces::GetBlockType({ matrixRow, matrixCol, pieceState.piece, pieceState.rotation }) != 0)
+                board[col][row] = POS_FILLED;
         }
     }
 }
@@ -31,9 +31,9 @@ void Board::StorePiece(const PieceState& pieceState)
 bool Board::IsGameOver() const
 {
     // If the first line has blocks, then game over
-    for (int i = 0; i < BOARD_WIDTH; i++)
+    for (int col = 0; col < BOARD_WIDTH; col++)
     {
-        if (board[i][0] == POS_FILLED)
+        if (board[col][0] == POS_FILLED)
             return true;
     }
 
@@ -58,11 +58,11 @@ void Board::DeleteLine(int posY)
 {
     // Moves all the upper lines one row down
     // TODO: does this actually clear the bottom-most line? hmm...
-    for (int j = posY; j > 0; j--)
+    for (int row = posY; row > 0; row--)
     {
-        for (int i = 0; i < BOARD_WIDTH; i++)
+        for (int col = 0; col < BOARD_WIDTH; col++)
         {
-            board[i][j] = board[i][j - 1];
+            board[col][row] = board[col][row - 1];
         }
     }
 }
@@ -70,17 +70,17 @@ void Board::DeleteLine(int posY)
 /// @brief Determines which lines to clear and removes them from the board.
 void Board::DeletePossibleLines()
 {
-    for (int j = 0; j < BOARD_HEIGHT; j++)
+    for (int row = 0; row < BOARD_HEIGHT; row++)
     {
-        int i = 0;
-        for (; i < BOARD_WIDTH; ++i)
+        int col = 0;
+        for (; col < BOARD_WIDTH; ++col)
         {
-            if (board[i][j] != POS_FILLED)
+            if (board[col][row] == POS_FREE)
                 break;
         }
 
-        if (i == BOARD_WIDTH)
-            DeleteLine(j);
+        if (col == BOARD_WIDTH)
+            DeleteLine(row);
     }
 }
 
@@ -100,27 +100,27 @@ bool Board::IsPossibleMovement(const PieceState& pieceState) const
 {
     // Checks collision with pieces already stored in the board or the board limits
     // This is just to check the 5x5 blocks of a piece with the appropriate area in the board
-    for (int i1 = pieceState.posX, i2 = 0;
-        i1 < pieceState.posX + PIECE_BLOCKS; i1++, i2++)
+    for (int col = pieceState.posX, matrixCol = 0;
+        col < pieceState.posX + PIECE_BLOCKS; col++, matrixCol++)
     {
-        for (int j1 = pieceState.posY, j2 = 0;
-            j1 < pieceState.posY + PIECE_BLOCKS; j1++, j2++)
+        for (int row = pieceState.posY, matrixRow = 0;
+            row < pieceState.posY + PIECE_BLOCKS; row++, matrixRow++)
         {
-            int blockType = Pieces::GetBlockType({ j2, i2, pieceState.piece, pieceState.rotation });
+            int blockType = Pieces::GetBlockType({ matrixRow, matrixCol, pieceState.piece, pieceState.rotation });
 
             // Check if the piece is outside the limits of the board
-            if (i1 < 0 ||
-                i1 > BOARD_WIDTH - 1 ||
-                j1 > BOARD_HEIGHT - 1)
+            if (col < 0 ||
+                col > BOARD_WIDTH - 1 ||
+                row > BOARD_HEIGHT - 1)
             {
                 if (blockType != 0)
                     return false;
             }
 
             // Check if the piece has collided with a block already stored in the map
-            if (j1 >= 0)
+            if (row >= 0)
             {
-                if (blockType != 0 && !IsFreeBlock(i1, j1))
+                if (blockType != 0 && !IsFreeBlock(col, row))
                     return false;
             }
         }
