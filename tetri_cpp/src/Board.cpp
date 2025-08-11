@@ -5,7 +5,7 @@ Board::Board()
 {
     for (int col = 0; col < BOARD_WIDTH; col++)
         for (int row = 0; row < BOARD_HEIGHT; row++)
-            board[col][row] = POS_FREE;
+            board[row][col] = POS_FREE;
 }
 
 /// @brief Store a piece in the board by filling in its blocks.
@@ -21,7 +21,7 @@ void Board::StorePiece(const PieceState& pieceState)
         {
             // Store only the blocks of the piece that are not holes
             if (Pieces::GetBlockType({ matrixRow, matrixCol, pieceState.piece, pieceState.rotation }) != 0)
-                board[col][row] = POS_FILLED;
+                board[row][col] = POS_FILLED;
         }
     }
 }
@@ -33,7 +33,7 @@ bool Board::IsGameOver() const
     // If the first line has blocks, then game over
     for (int col = 0; col < BOARD_WIDTH; col++)
     {
-        if (board[col][0] == POS_FILLED)
+        if (board[0][col] == POS_FILLED)
             return true;
     }
 
@@ -62,7 +62,7 @@ void Board::DeleteLine(int posY)
     {
         for (int col = 0; col < BOARD_WIDTH; col++)
         {
-            board[col][row] = board[col][row - 1];
+            board[row][col] = board[row - 1][col];
         }
     }
 }
@@ -75,7 +75,7 @@ void Board::DeletePossibleLines()
         int col = 0;
         for (; col < BOARD_WIDTH; ++col)
         {
-            if (board[col][row] == POS_FREE)
+            if (board[row][col] == POS_FREE)
                 break;
         }
 
@@ -90,7 +90,7 @@ void Board::DeletePossibleLines()
 /// @return `true` if the block's position is occupied, `false` otherwise.
 bool Board::IsFreeBlock(int posX, int posY) const
 {
-    return board[posX][posY] == POS_FREE;
+    return board[posY][posX] == POS_FREE;
 }
 
 /// @brief Check if a given piece can be stored at this position on the board.

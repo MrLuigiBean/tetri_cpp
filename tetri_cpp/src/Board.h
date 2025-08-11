@@ -68,7 +68,7 @@ private:
     };
 
     /// @brief Represents the board containing the blocks from fallen pieces.
-    char board[BOARD_WIDTH][BOARD_HEIGHT] = { POS_FREE };
+    char board[BOARD_HEIGHT][BOARD_WIDTH] = { POS_FREE };
 
     /// @brief Deletes a line of the board by moving all lines above down.
     /// @param posY Vertical position of blocks in the line to delete.
