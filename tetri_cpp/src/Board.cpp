@@ -72,14 +72,15 @@ void Board::DeletePossibleLines()
 {
     for (int row = 0; row < BOARD_HEIGHT; row++)
     {
-        int col = 0;
-        for (; col < BOARD_WIDTH; ++col)
+        bool isRowFull = true;
+        for (int col = 0; col < BOARD_WIDTH; ++col)
         {
-            if (board[row][col] == POS_FREE)
+            isRowFull &= board[row][col] == POS_FILLED;
+            if (!isRowFull)
                 break;
         }
 
-        if (col == BOARD_WIDTH)
+        if (isRowFull)
             DeleteLine(row);
     }
 }
