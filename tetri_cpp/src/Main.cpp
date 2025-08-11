@@ -21,7 +21,8 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
     SDL_MaximizeWindow(state.window);
 
     SDL_SetWindowMinimumSize(state.window,
-        BOARD_WIDTH * BLOCK_SIZE + 2 * BOARD_LINE_WIDTH, BOARD_HEIGHT * BLOCK_SIZE);
+        (BOARD_WIDTH * 2) * BLOCK_SIZE, // enough width for seeing upcoming piece
+        (BOARD_HEIGHT + 3) * BLOCK_SIZE); // a little more height to see the top of board
 
     int screenWidth, screenHeight;
     SDL_GetRenderOutputSize(state.renderer, &screenWidth, &screenHeight);

@@ -24,8 +24,8 @@ Game::Game(int width, int height) : screenWidth{ width }, screenHeight{ height }
     // Next piece
     nextPiece.piece = GetRand(0, TOTAL_KINDS - 1);
     nextPiece.rotation = GetRand(0, TOTAL_ROTATIONS - 1);
-    nextPiece.posX = BOARD_WIDTH + 5;
-    nextPiece.posY = 5;
+    nextPiece.posX = BOARD_WIDTH;
+    nextPiece.posY = 0;
 }
 
 /// @brief Returns a random number between two integers.
